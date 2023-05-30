@@ -1,0 +1,10 @@
+<RCC>
+  <qresource prefix="img">
+    <file>Img/logo.png</file>
+    <file>Img/GreenLight.png</file>
+    <file>Img/RedLight.png</file>
+    <file>Img/water.jpg</file>
+    <file>Img/bamboo-texture_1136-248.jpg</file>
+    <file>Img/YellowLight.png</file>
+  </qresource>
+</RCC>
