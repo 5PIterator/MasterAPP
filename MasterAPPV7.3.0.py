@@ -36,19 +36,18 @@ class MainWindow(Ui_MasterAPP):
     def __init__(self, window) -> None:
         self.setupUi(window)
         self.cableItem_1.setVisible(False)
-        self.graphFrame_1.setVisible(False)
         self.pb_startClients.setEnabled(True)
         self.pb_retry.setEnabled(False)
         self.cb_auto_cableUpdate.setEnabled(False)
         self.pb_stopClients.setEnabled(False)
         self.pb_updateCables.setEnabled(False)
 
-        self.wl_pyqtGraph_1.plotItem.setLabel('left', "Cable0")
-        self.wl_pyqtGraph_1.plotItem.setLabel('bottom', 'Time (HHMM.SS)')
-        self.wl_pyqtGraph_1.plotItem.getViewBox().setLimits(yMin=-0.2, yMax=2.2, xMin=0, xMax=240000, minYRange=-0.2, maxYRange=2.2, minXRange=0, maxXRange=240000)
-        self.wl_pyqtGraph_1.plotItem.getViewBox().setMouseEnabled(x=True,y=False)
-        self.wl_pyqtGraph_1.plotItem.getViewBox().setRange(yRange=(0,2))
-        self.wl_pyqtGraph_1.plotItem.showGrid(True,False)
+        self.pg_workload_1.plotItem.setLabel('left', "Cable0")
+        self.pg_workload_1.plotItem.setLabel('bottom', 'Time (HHMM.SS)')
+        self.pg_workload_1.plotItem.getViewBox().setLimits(yMin=-0.2, yMax=2.2, xMin=0, xMax=240000, minYRange=-0.2, maxYRange=2.2, minXRange=0, maxXRange=240000)
+        self.pg_workload_1.plotItem.getViewBox().setMouseEnabled(x=True,y=False)
+        self.pg_workload_1.plotItem.getViewBox().setRange(yRange=(0,2))
+        self.pg_workload_1.plotItem.showGrid(True,False)
 
         # EventHandlers
         self.tabWidget_2.tabBarClicked.connect(self.splitter_resize)
@@ -90,7 +89,7 @@ class MainWindow(Ui_MasterAPP):
         #self.historyButton_3.pressed.connect(self.colapseH)
         #self.historyCheckBox.stateChanged.connect(self.updateSettings)
         self.graphItems = [
-            self.wl_pyqtGraph_1.plotItem
+            self.pg_workload_1.plotItem
         ]
 
     # Startup part 1: Window setup and Settings
@@ -447,7 +446,7 @@ class MainWindow(Ui_MasterAPP):
                 pass
             elif cableCount > 0:
                 CableItems[0].setVisible(True)
-                CableGraph[0].setVisible(True)
+                #CableGraph[0].setVisible(True)
 
                 printH("Registering new cables...", 1, str(cableCount) + " cables")
                 c = 0
@@ -467,14 +466,14 @@ class MainWindow(Ui_MasterAPP):
                             printH("Interrupted", 2, "stop button")
                             return False
                     CableItems[c].setVisible(True) # Enable already created CableItems
-                    CableGraph[c].setVisible(True) # Enable already created graphs
+                    #CableGraph[c].setVisible(True) # Enable already created graphs
 
                     printH("Cable" + str(c) + " registered", 2, str(len(CableItems)) + "/" + str(cableCount))
                     c += 1
                 c = len(CableItems)
                 while cableCount < c:
                     CableItems[c - 1].setVisible(False)
-                    CableGraph[c - 1].setVisible(False)
+                    #CableGraph[c - 1].setVisible(False)
                     printH("Cable" + str(c - 1) + " removed", 2, str(c) + "/" + str(cableCount))
                     c -= 1
                 sleep(0.02)
@@ -482,7 +481,7 @@ class MainWindow(Ui_MasterAPP):
                 self.updateGraph1(True)
             else:
                 CableItems[0].setVisible(False)
-                CableGraph[0].setVisible(False)
+                #CableGraph[0].setVisible(False)
                 return False
         except:
             printH("Error encountered.", 1)
@@ -582,7 +581,7 @@ class MainWindow(Ui_MasterAPP):
             layout: QtWidgets.QLayout
             layout = self.CableScrollAreaWidgetContents.layout()
             layout.insertWidget(layout.count() - 2, newCableItem)
-
+            '''
             #New cable graph
             newgraphFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
             newgraphFrame.setFrameShape(self.graphFrame_1.frameShape())
@@ -596,24 +595,22 @@ class MainWindow(Ui_MasterAPP):
             newgridLayout = QtWidgets.QGridLayout(newgraphFrame)
             newgridLayout.setContentsMargins(0, 0, 0, 0)
             newgridLayout.setSpacing(0)
-            newgridLayout.setObjectName("gridLayout_" + str(len(CableItems)))
+            newgridLayout.setObjectName("gridLayout_" + str(len(CableItems)))'''
 
-            newpyqtGraph = PlotWidget(newgraphFrame)
-            newpyqtGraph.setSizePolicy(self.wl_pyqtGraph_1.sizePolicy())
-            newpyqtGraph.setObjectName("wl_pyqtGraph_" + str(len(CableItems)))
+            newpyqtGraph = PlotWidget(self.scrollAreaWidgetContents)
+            newpyqtGraph.setSizePolicy(self.pg_workload_1.sizePolicy())
+            newpyqtGraph.setObjectName("pg_workload_" + str(len(CableItems)))
 
-            newgridLayout.addWidget(newpyqtGraph, 0, 0, 1, 1)
-            self.verticalLayout_6.addWidget(newgraphFrame)
+            '''newgridLayout.addWidget(newpyqtGraph, 0, 0, 1, 1)
+            self.verticalLayout_6.addWidget(newgraphFrame)'''
 
-            layout = self.scrollAreaWidgetContents.layout()
-            layout.insertWidget(layout.count() - 2, newgraphFrame)
+            '''layout = self.scrollAreaWidgetContents.layout()
+            layout.insertWidget(layout.count() - 2, newgraphFrame)'''
 
             CableItems.append(newCableItem)
-            CableGraph.append(newgraphFrame)
+            #CableGraph.append(newpyqtGraph)
 
-            graphItem = newgraphFrame.children()[1]
-            graphItem: PlotWidget
-            self.graphItems.append(graphItem)
+            self.graphItems.append(newpyqtGraph)
             self.graphItems[len(CableItems) - 1].setLabel('left', newviewImage.text())
             self.graphItems[len(CableItems) - 2].setLabel('bottom', '')
             self.graphItems[len(CableItems) - 1].setLabel('bottom', 'Time (HHMM.SS)')
@@ -632,13 +629,13 @@ class MainWindow(Ui_MasterAPP):
             while i <= 1:
                 printH("Removing Cable" + str(i), 0, str(i + 1) + "/" + str(len(CableItems)))
                 CableItems.pop(i).deleteLater()
-                CableGraph.pop(i).deleteLater()
+                #CableGraph.pop(i).deleteLater()
             CableItems[0].setVisible(False)
-            CableGraph[0].setVisible(False)
+            #CableGraph[0].setVisible(False)
         else:
             printH("Removing Cable" + str(index), 0, str(index) + "/" + str(len(CableItems)))
             CableItems[index].setVisible(False)
-            CableGraph[index].setVisible(False)
+            #CableGraph[index].setVisible(False)
         pass
 
     # Create Splitter Auto resize
@@ -1896,9 +1893,9 @@ CableItems = [
     window.cableItem_1,
 ]
 CableDictionary = []
-CableGraph = [
-    window.graphFrame_1,
-]
+'''CableGraph = [
+    window.pg_workload_1,
+]'''
 
 parentitem = QtWidgets.QTreeWidgetItem()
 parentTree = [
