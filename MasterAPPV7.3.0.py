@@ -1,4 +1,4 @@
-
+#pyinstaller --onefile MasterAPPV6.0.py
 # Bugs:
 # Sometimes the background disappears and defaults into white background.
 # Retry change crashed once
@@ -434,6 +434,21 @@ class MainWindow(Ui_MasterAPP):
             graphitem.plot(self.graphData[index][0], self.graphData[index][1])
             index += 1
         printH("Graphs updated!", 2, "Graphs updated from File.")
+    @toMainThread
+    def setupGraphs(args:tuple, kwargs:dict):
+        self, index = (
+            args[0] if args else kwargs.get('self'),
+            args[1] if len(args) > 1 else kwargs.get('index')
+        )
+        self: MainWindow
+        for i in range(len(CableItems)):
+            self.graphItems[i].setLabel('left', "Cable" + str(index))
+            self.graphItems[i - 1].setLabel('bottom', '')
+            self.graphItems[i].setLabel('bottom', 'Time (HHMM.SS)')
+            self.graphItems[i].getViewBox().setLimits(yMin=-0.2, yMax=2.2, xMin=0, xMax=240000, minYRange=-0.2, maxYRange=2.2, minXRange=0, maxXRange=240000)
+            self.graphItems[i].getViewBox().setMouseEnabled(x=True,y=False)
+            self.graphItems[i].getViewBox().setRange(yRange=(0,2))
+            self.graphItems[i].showGrid(True,False)
 
     # Cables
     def recievedCableCount(self):
@@ -454,7 +469,6 @@ class MainWindow(Ui_MasterAPP):
                     sleep(.1)
                     if cableCount > len(CableItems):
                         self.addCableItem()
-                    self.setupGraphs(c)
 
                     t = 0 # timeout
                     while len(CableItems) != c + 1: # wait for mainThread to add Cable
@@ -470,6 +484,7 @@ class MainWindow(Ui_MasterAPP):
 
                     printH("Cable" + str(c) + " registered", 2, str(len(CableItems)) + "/" + str(cableCount))
                     c += 1
+                self.setupGraphs(c)
                 c = len(CableItems)
                 while cableCount < c:
                     CableItems[c - 1].setVisible(False)
@@ -489,19 +504,6 @@ class MainWindow(Ui_MasterAPP):
             window.StartButton()
             return False
         return True
-    @toMainThread
-    def setupGraphs(args:tuple, kwargs:dict):
-        self, index = (
-            args[0] if args else kwargs.get('self'),
-            args[1] if len(args) > 1 else kwargs.get('index')
-        )
-        self: MainWindow
-        self.graphItems[len(CableItems) - 1].setLabel('left', "Cable" + str(index))
-        self.graphItems[len(CableItems) - 1].setLabel('bottom', 'Time (HHMM.SS)')
-        self.graphItems[len(CableItems) - 1].getViewBox().setLimits(yMin=-0.2, yMax=2.2, xMin=0, xMax=240000, minYRange=-0.2, maxYRange=2.2, minXRange=0, maxXRange=240000)
-        self.graphItems[len(CableItems) - 1].getViewBox().setMouseEnabled(x=True,y=False)
-        self.graphItems[len(CableItems) - 1].getViewBox().setRange(yRange=(0,2))
-        self.graphItems[len(CableItems) - 1].showGrid(True,False)
 
     # Add another CableItem by copying template(CableItems[0])
     @toMainThread
@@ -581,43 +583,21 @@ class MainWindow(Ui_MasterAPP):
             layout: QtWidgets.QLayout
             layout = self.CableScrollAreaWidgetContents.layout()
             layout.insertWidget(layout.count() - 2, newCableItem)
-            '''
-            #New cable graph
-            newgraphFrame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
-            newgraphFrame.setFrameShape(self.graphFrame_1.frameShape())
-            newgraphFrame.setFrameShadow(self.graphFrame_1.frameShadow())
-            newgraphFrame.setLineWidth(self.graphFrame_1.lineWidth())
-            newgraphFrame.setSizePolicy(self.graphFrame_1.sizePolicy())
-            newgraphFrame.setMinimumSize(self.graphFrame_1.minimumSize())
-            newgraphFrame.setMaximumSize(self.graphFrame_1.maximumSize())
-            newgraphFrame.setObjectName("graphFrame_" + str(len(CableItems)))
 
-            newgridLayout = QtWidgets.QGridLayout(newgraphFrame)
-            newgridLayout.setContentsMargins(0, 0, 0, 0)
-            newgridLayout.setSpacing(0)
-            newgridLayout.setObjectName("gridLayout_" + str(len(CableItems)))'''
-
-            newpyqtGraph = PlotWidget(self.scrollAreaWidgetContents)
+            newpyqtGraph = PlotWidget()
             newpyqtGraph.setSizePolicy(self.pg_workload_1.sizePolicy())
             newpyqtGraph.setObjectName("pg_workload_" + str(len(CableItems)))
 
-            '''newgridLayout.addWidget(newpyqtGraph, 0, 0, 1, 1)
-            self.verticalLayout_6.addWidget(newgraphFrame)'''
+            '''layout.addWidget(newpyqtGraph, 0, 0, 1, 1)
+            self.verticalLayout_6.addWidget(newpyqtGraph)'''
 
-            '''layout = self.scrollAreaWidgetContents.layout()
-            layout.insertWidget(layout.count() - 2, newgraphFrame)'''
+            layout = self.scrollAreaWidgetContents.layout()
+            layout.insertWidget(len(CableItems), newpyqtGraph)
 
             CableItems.append(newCableItem)
             #CableGraph.append(newpyqtGraph)
 
             self.graphItems.append(newpyqtGraph)
-            self.graphItems[len(CableItems) - 1].setLabel('left', newviewImage.text())
-            self.graphItems[len(CableItems) - 2].setLabel('bottom', '')
-            self.graphItems[len(CableItems) - 1].setLabel('bottom', 'Time (HHMM.SS)')
-            self.graphItems[len(CableItems) - 1].getViewBox().setLimits(yMin=-0.2, yMax=2.2, xMin=0, xMax=240000, minYRange=-0.2, maxYRange=2.2, minXRange=0, maxXRange=240000)
-            self.graphItems[len(CableItems) - 1].getViewBox().setMouseEnabled(x=True,y=False)
-            self.graphItems[len(CableItems) - 1].getViewBox().setRange(yRange=(0,2))
-            self.graphItems[len(CableItems) - 1].showGrid(True,False)
         else:
             isStart = False
         import_CableItemInfo(len(CableItems) - 1, new=True)
@@ -1680,7 +1660,7 @@ class PLC_Client(): # slot has to be in undefined class
 plc = PLC_Client()
 class AX_Server():
     def __init__(self) -> None:
-        self.server_allowed = True
+        self.server_allowed = False
         self.host = '192.168.11.50'
         self.port = 11854
         self.ax_server = None
@@ -2397,7 +2377,7 @@ domainHost = ""
 domainPort = 0
 domainUser = ""
 domainPassword = ""
-localPath = ""
+localPath = "Workload"
 minMinuteState = 10
 minuteState = []
 forceSaveStateData = False
