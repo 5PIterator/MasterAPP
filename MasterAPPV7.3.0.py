@@ -2804,8 +2804,6 @@ def updateValues(blank=False):
         stopUpdate = False
 cableUpdate = threadPool.submit(updateValues, blank=True)
 
-
-
 # Call start on first launch
 
 if __name__ == "__main__":
