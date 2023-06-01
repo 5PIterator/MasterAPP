@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\kryst\Desktop\WorkProjects\ISARP\MasterAPP\ui\MasterAPPV6.ui'
+# Form implementation generated from reading ui file 'c:\Users\kryst\Desktop\GitProjects\ISARP\MasterAPP\ui\MasterAPPV6.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -272,7 +272,7 @@ class Ui_MasterAPP(object):
         self.historyScrollArea.setWidgetResizable(True)
         self.historyScrollArea.setObjectName("historyScrollArea")
         self.scrollAreaWidgetContents_8 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_8.setGeometry(QtCore.QRect(0, 0, 681, 579))
+        self.scrollAreaWidgetContents_8.setGeometry(QtCore.QRect(0, 0, 189, 117))
         self.scrollAreaWidgetContents_8.setObjectName("scrollAreaWidgetContents_8")
         self.gridLayout_4 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_8)
         self.gridLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -1023,7 +1023,7 @@ class Ui_MasterAPP(object):
         MasterAPP.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MasterAPP)
-        self.tabWidget_2.setCurrentIndex(3)
+        self.tabWidget_2.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MasterAPP)
 
     def retranslateUi(self, MasterAPP):

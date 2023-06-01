@@ -173,7 +173,7 @@ QTabBar::tab {
 }</string>
                   </property>
                   <property name="currentIndex">
-                   <number>3</number>
+                   <number>2</number>
                   </property>
                   <widget class="QWidget" name="MainTab">
                    <property name="styleSheet">
@@ -223,7 +223,7 @@ QTabBar::tab {
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap resource="../../Experimental version/ui/Images.qrc">:/img/Img/logo.png</pixmap>
+                           <pixmap resource="Images.qrc">:/img/Img/logo.png</pixmap>
                           </property>
                           <property name="scaledContents">
                            <bool>false</bool>
@@ -605,8 +605,8 @@ QTabBar::tab {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>681</width>
-                         <height>579</height>
+                         <width>189</width>
+                         <height>117</height>
                         </rect>
                        </property>
                        <layout class="QGridLayout" name="gridLayout_4">
@@ -2489,7 +2489,7 @@ background:white
                       <string/>
                      </property>
                      <property name="pixmap">
-                      <pixmap resource="../../Experimental version/ui/Images.qrc">:/img/Img/YellowLight.png</pixmap>
+                      <pixmap resource="Images.qrc">:/img/Img/YellowLight.png</pixmap>
                      </property>
                      <property name="scaledContents">
                       <bool>false</bool>
@@ -2739,6 +2739,7 @@ background:white
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="Images.qrc"/>
   <include location="../../Experimental version/ui/Images.qrc"/>
  </resources>
  <connections/>

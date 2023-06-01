@@ -27,8 +27,8 @@ from ui.NewDomain import Ui_EnterNewDomain
 import ui.Images_rc  #Important! Do not delete.
 from ToMainThreadV2 import toMainThread
 import LocalRegistryLibraryV7 as LRLibrary
-import SettingsManagerV1 as SM
-from SettingsManagerV1 import settingsDict as SD
+import SettingsManagerV2 as SM
+#from SettingsManagerV1 import settingsDict as SD
 
 class MainWindow(Ui_MasterAPP):
     resized = QtCore.pyqtSignal()
@@ -53,27 +53,27 @@ class MainWindow(Ui_MasterAPP):
         self.tabWidget_2.tabBarClicked.connect(self.splitter_resize)
         self.splitter.splitterMoved.connect(self.splitter_resize)
 
-        self.sb_retryInterval.valueChanged.connect(self.SaveSettings)
-        self.dsb_apiInterval.valueChanged.connect(self.SaveSettings)
-        self.dsb_axInterval.valueChanged.connect(self.SaveSettings)
-        self.dsb_plcInterval.valueChanged.connect(self.SaveSettings)
-        self.sb_cableCount.valueChanged.connect(self.SaveSettings)
-        self.le_apiAddress.editingFinished.connect(self.SaveSettings)
-        self.le_apiPort.editingFinished.connect(self.SaveSettings)
-        self.le_plcAddress.editingFinished.connect(self.SaveSettings)
-        self.le_plcPort.editingFinished.connect(self.SaveSettings)
-        self.le_axAddress.editingFinished.connect(self.SaveSettings)
-        self.le_axPort.editingFinished.connect(self.SaveSettings)
-        self.cb_apiAllowed.stateChanged.connect(self.SaveSettings)
-        self.cb_plcAllowed.stateChanged.connect(self.SaveSettings)
-        self.cb_axAllowed.stateChanged.connect(self.SaveSettings)
-        self.cb_auto_startClients.stateChanged.connect(self.SaveSettings)
-        self.cb_auto_retry.stateChanged.connect(self.SaveSettings)
-        self.cb_auto_cableUpdate.stateChanged.connect(self.SaveSettings)
-        self.cb_auto_cableCount.stateChanged.connect(self.SaveSettings)
-        self.cb_SaveStyle.currentIndexChanged.connect(self.SaveSettings)
-        self.pb_MMState.valueChanged.connect(self.SaveSettings)
-        self.le_areal.editingFinished.connect(self.SaveSettings)
+        self.sb_retryInterval.valueChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.dsb_apiInterval.valueChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.dsb_axInterval.valueChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.dsb_plcInterval.valueChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.sb_cableCount.valueChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.le_apiAddress.editingFinished.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.le_apiPort.editingFinished.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.le_plcAddress.editingFinished.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.le_plcPort.editingFinished.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.le_axAddress.editingFinished.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.le_axPort.editingFinished.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_apiAllowed.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_plcAllowed.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_axAllowed.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_auto_startClients.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_auto_retry.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_auto_cableUpdate.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_auto_cableCount.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_SaveStyle.currentIndexChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.pb_MMState.valueChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.le_areal.editingFinished.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
 
         # UIButtons
         self.pb_startClients.pressed.connect(self.StartButton)
@@ -109,7 +109,7 @@ class MainWindow(Ui_MasterAPP):
         checkSettings = True
         if plc.client_allowed:
             self.pb_updateCables.setEnabled(False)
-        self.SaveSettings()
+        SM.getValues(valueHandler=self.SaveSettings)
 
         if autoStart_allowed:  # auto start
             self.StartButton()
@@ -150,11 +150,11 @@ class MainWindow(Ui_MasterAPP):
         SM.addOption('domain', 'domainUser', domainUser, dialog.d_lineEdit_3, b'6araaoXwfSsMllEYNf8JHN1kePLImcCsbAQ8AB8-xDM=')
         SM.addOption('domain', 'domainPassword', domainPassword, dialog.d_lineEdit_4, b'6araaoXwfSsMllEYNf8JHN1kePLImcCsbAQ8AB8-xDM=')
         SM.addOption('domain', 'saveStyle', saveStyle, self.cb_SaveStyle)
-        SM.addOption('domain', 'localPath', localPath, self.l_localPath)
+        SM.addOption('domain', 'localWorkloadPath', localWorkloadPath, self.l_workloadPath)
         SM.addOption('domain', 'areal', areal, self.le_areal)
         SM.addOption('domain', 'minMinuteState', minMinuteState, self.pb_MMState)
 
-    def SaveSettings(self):
+    def SaveSettings(self, SD:dict):
         global retry
         global autoStart_allowed
         global autoRetry_allowed
@@ -175,14 +175,13 @@ class MainWindow(Ui_MasterAPP):
         global domainPassword
         global quidoMaxInput
         global saveStyle
-        global localPath
+        global localWorkloadPath
         global minMinuteState
         global areal
 
         if not checkSettings:
             return
         checkSettings = False
-        SM.getValues()
 
         #plc.plc_getCableCount_allowed = SD["masterAPP"]["plc_getCableCount_allowed"][0]
         retryInterval = SD["masterAPP"]["retryInterval"][0]
@@ -203,8 +202,11 @@ class MainWindow(Ui_MasterAPP):
         if not areal == '':
             areal += '/'
 
+        self.pb_MMState.valueChanged.disconnect()
         self.pb_MMState.setSuffix("/" + str(int(60 / self.dsb_plcInterval.value())) + "s")
         self.pb_MMState.setMaximum(int(60 / self.dsb_plcInterval.value()))
+        self.pb_MMState.valueChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+
         if autoUpdate_allowed:
             cableUpdateEnabled = True
         else:
@@ -264,7 +266,7 @@ class MainWindow(Ui_MasterAPP):
                 self.le_plcPort.setText('')
         if str(ax.host) != self.le_axAddress.text():  # AX Address(host)
             if self.le_axAddress.text() != '' and self.le_axAddress.text().isdigit():
-                ax.host = int(self.le_axAddress.text())
+                ax.host = self.le_axAddress.text()
                 restart = True
             else:
                 ax.host = "192.168.11.50"
@@ -330,6 +332,7 @@ class MainWindow(Ui_MasterAPP):
         SD["api"]["client_allowed"][0] = api.client_allowed
         SD["plc"]["client_allowed"][0] = plc.client_allowed
         checkSettings = True
+        return SD
 
     #Updates Graph of every cable
     autoMove = True
@@ -338,7 +341,7 @@ class MainWindow(Ui_MasterAPP):
     def updateGraph1(self, loadFile=True):
         """Pre-calculation for graphs"""
         dateTime = datetime.now()
-        wPath = localPath + "/" + areal + str(dateTime.year) + '/' + str(dateTime.month).zfill(2) + '/' + str(dateTime.day).zfill(2) + '/'
+        wPath = localWorkloadPath + "/" + areal + str(dateTime.year) + '/' + str(dateTime.month).zfill(2) + '/' + str(dateTime.day).zfill(2) + '/'
 
         state = None
         time = None
@@ -352,6 +355,8 @@ class MainWindow(Ui_MasterAPP):
         #       CableN[],
         #       ...
         #   ]
+        graphTime = []
+        graphState = []
         if loadFile:
             if not os.path.exists(wPath):
                 os.makedirs(wPath)
@@ -418,12 +423,8 @@ class MainWindow(Ui_MasterAPP):
 
         self.updateGraph2()
     @toMainThread
-    def updateGraph2(args:tuple, kwargs:dict):
+    def updateGraph2(self):
         """Graph update"""
-        self = (
-            args[0] if args else kwargs.get('self')
-        )
-        self: MainWindow
         if self.graphData == []:
             return
 
@@ -435,12 +436,7 @@ class MainWindow(Ui_MasterAPP):
             index += 1
         printH("Graphs updated!", 2, "Graphs updated from File.")
     @toMainThread
-    def setupGraphs(args:tuple, kwargs:dict):
-        self, index = (
-            args[0] if args else kwargs.get('self'),
-            args[1] if len(args) > 1 else kwargs.get('index')
-        )
-        self: MainWindow
+    def setupGraphs(self, index):
         for i in range(len(CableItems)):
             self.graphItems[i].setLabel('left', "Cable" + str(index))
             self.graphItems[i - 1].setLabel('bottom', '')
@@ -507,12 +503,7 @@ class MainWindow(Ui_MasterAPP):
 
     # Add another CableItem by copying template(CableItems[0])
     @toMainThread
-    def addCableItem(args:tuple, kwargs:dict):
-        self = (
-            args[0] if args else kwargs.get('self')
-        )
-        self: MainWindow
-
+    def addCableItem(self):
         global isStart
         global CableItems
         if not isStart:
@@ -650,7 +641,7 @@ class MainWindow(Ui_MasterAPP):
         global cableUpdateEnabled
         global saveStateAllowed
         global cableUpdateAllowed
-        SM.getValues()
+        SM.getValues(valueHandler=self.SaveSettings)
 
         printH("Cleanup:", 0)
         saveStateAllowed = False
@@ -735,8 +726,8 @@ class MainWindow(Ui_MasterAPP):
         domainPort = dialog.d_lineEdit_2.text()
         domainUser = dialog.d_lineEdit_3.text()
         domainPassword = dialog.d_lineEdit_4.text()
-        self.d_label.setText(domainHost)
-        SM.getValues()
+        self.l_domainHost.setText(domainHost)
+        SM.getValues(valueHandler=self.SaveSettings)
 
     def SaveStateDataButton(self):
         global forceSaveStateData
@@ -745,27 +736,13 @@ class MainWindow(Ui_MasterAPP):
             forceSaveStateData = True
 
     @toMainThread
-    def updateLabelCounter(args:tuple, kwargs:dict):
-        self, label, number, description = (
-            args[0] if args else kwargs.get('self'),
-            args[1] if len(args) > 1 else kwargs.get('label'),
-            args[2] if len(args) > 2 else kwargs.get('number'),
-            args[3] if len(args) > 3 else kwargs.get('description', None)
-        )
-        label: QtWidgets.QLabel
-
+    def updateLabelCounter(self, label: QtWidgets.QLabel, number, description: str=None):
         label.setText(('(' + description + ') ' if description is not None else '') + str(number))
 
     @toMainThread
-    def clearH(args:tuple, kwargs:dict):
+    def clearH(self, ask:bool=False):
         global parentTree
         global parentitem
-
-        self, ask = (
-            args[0] if args else kwargs.get('self'),
-            args[1] if len(args) > 1 else kwargs.get('ask')
-        )
-        self:MainWindow
 
         self.historyButton.setEnabled(False)
         if ask:
@@ -833,16 +810,16 @@ class MainWindow(Ui_MasterAPP):
         self.historyButton_2.setEnabled(True)
 
     def workloadPath(self):
-        global localPath
+        global localWorkloadPath
         root = tkinter.Tk()
         root.withdraw()
-        path = filedialog.askdirectory(initialdir=localPath)
+        path = filedialog.askdirectory(initialdir=localWorkloadPath)
         root.destroy()
         if path is None or path == '':
             return
-        localPath = path
-        self.l_localPath.setText(localPath)
-        SM.getValues()
+        localWorkloadPath = path
+        self.l_workloadPath.setText(localWorkloadPath)
+        SM.getValues(valueHandler=self.SaveSettings)
 
     '''def colapseH(self):
         self.historyButton_2.setEnabled(False)
@@ -1064,14 +1041,7 @@ class API_Client():
 
     # Decyphers the response of API
     @toMainThread
-    def API_Decypher(args:tuple, kwargs:dict):
-        self, handler = (
-            args[0] if args else kwargs.get('self'),
-            args[1] if len(args) > 1 else kwargs.get('handler')
-        )
-        self: API_Client
-        handler: AXHandler
-
+    def API_Decypher(self, handler: AXHandler):
         global cableUpdateProceed
 
         self.api_recieved = False
@@ -1431,13 +1401,7 @@ class PLC_Client(): # slot has to be in undefined class
 
     # Decyphers the response of PLC
     @toMainThread
-    def PLC_Decypher(args:tuple, kwargs:dict):
-        self, response = (
-            args[0] if args else kwargs.get('self'),
-            args[1] if len(args) > 1 else kwargs.get('response', None),
-        )
-        self: PLC_Client
-
+    def PLC_Decypher(self, response:list=None):
         global CableItems
         global cableCount
         global cableUpdateProceed
@@ -2004,9 +1968,9 @@ def Retry(loop = False):
             firstAttempt = False
             for i in range(int(retryInterval)):  # Timeout
                 sleep(1)
-                window.updateLabelCounter(window.auto_label_4, str(int(retryInterval) - i).zfill(2))
+                window.updateLabelCounter(window.l_retryInterval, str(int(retryInterval) - i).zfill(2))
                 if stop_Retry(): return
-                window.updateLabelCounter(window.auto_label_4, str(0).zfill(2))
+                window.updateLabelCounter(window.l_retryInterval, str(0).zfill(2))
             if not loop:
                 retry = threadPool.submit(loop_Retry) # Connection retry for API and PLC (30s)
         else:
@@ -2055,7 +2019,7 @@ def saveStateDataTimer(blank: bool = False):
 
     '''while datetime.now().time().second != 0: #synchronize to a minute
         if forceCableUpdate or not cableUpdateEnabled: break
-        window.auto_label_1.setText(str(timedelta(minutes=1) - datetime.now().time().second).zfill(2))
+        window.l_plcInterval.setText(str(timedelta(minutes=1) - datetime.now().time().second).zfill(2))
         sleep(1)'''
     backupInterval = autoUpdate_Interval
 
@@ -2084,7 +2048,7 @@ def saveStateDataTimer(blank: bool = False):
                 window.updateGraph1()
                 sleep(0.01)
             elif window.tabWidget_2.currentIndex() == 2:
-                window.updateLabelCounter(window.ss_label_1, str(0).zfill(2))
+                window.updateLabelCounter(window.l_saveStateTimer, str(0).zfill(2))
             minuteState = [[3]*len(CableItems)]*60
 
             if backupInterval < autoUpdate_Interval:
@@ -2099,18 +2063,12 @@ def saveStateDataTimer(blank: bool = False):
         #nextTime = (currentTime + timedelta(seconds=int(autoUpdate_Interval))).time()
         nextMinute = currentTime.minute + 1
 
-        window.updateLabelCounter(window.ss_label_1, str((timedelta(minutes=1) - timedelta(seconds=datetime.now().time().second)).seconds).zfill(2))
+        window.updateLabelCounter(window.l_saveStateTimer, str((timedelta(minutes=1) - timedelta(seconds=datetime.now().time().second)).seconds).zfill(2))
 ssdt = threadPool.submit(saveStateDataTimer, True)
 
 # Imports new Cable information into tableWidget
 @toMainThread
-def import_CableItemInfo(args:tuple, kwargs:dict):
-    index, dictionary, new = (
-        args[0] if args else kwargs.get('index', 0),
-        args[1] if len(args) > 1 else kwargs.get('dictionary',
-        {"CS": "", "RS": "", "IDR": "", "Position": "", "Speed": "", "Error": ""}),
-        args[2] if len(args) > 2 else kwargs.get('new', False),
-    )
+def import_CableItemInfo(index=0, dictionary={"CS": "", "RS": "", "IDR": "", "Position": "", "Speed": "", "Error": ""}, new=False):
     tableWidget: QtWidgets.QTableWidget
     tableWidget = CableItems[index].children()[3]
     image: QtWidgets.QLabel
@@ -2270,17 +2228,9 @@ def testConnection(server):
 # ##HISTORY
 lastLevel = 0
 @toMainThread
-def printH(args:tuple, kwargs:dict):
+def printH(string:str='', level:int=lastLevel, description:str='', isRootEnd=False, inPool=False, blank=False):
     ''' Prints an item in historyList. !Processed in the MainThread!'''
     global lastLevel
-    string, level, description, isRootEnd, inPool, blank = (
-        args[0] if args else kwargs.get('string', ''),
-        args[1] if len(args) > 1 else kwargs.get('level', lastLevel),
-        args[2] if len(args) > 2 else kwargs.get('description', ''),
-        args[3] if len(args) > 3 else kwargs.get('isRootEnd', False),
-        args[4] if len(args) > 4 else kwargs.get('inPool', False),
-        args[5] if len(args) > 5 else kwargs.get('blank', False)
-    )
     if blank: return
 
     try:
@@ -2377,7 +2327,7 @@ domainHost = ""
 domainPort = 0
 domainUser = ""
 domainPassword = ""
-localPath = "Workload"
+localWorkloadPath = "Workload"
 minMinuteState = 10
 minuteState = []
 forceSaveStateData = False
@@ -2409,7 +2359,7 @@ def saveStateData():
                 minutes=0,
                 seconds=-dateTime.second,
                 microseconds=-dateTime.microsecond)
-        wPath = localPath + '/' + areal + str(dateTime.year) + '/' + str(dateTime.month).zfill(2) + '/' + str(dateTime.day).zfill(2) + '/'
+        wPath = localWorkloadPath + '/' + areal + str(dateTime.year) + '/' + str(dateTime.month).zfill(2) + '/' + str(dateTime.day).zfill(2) + '/'
         printH("Saving to local directory...", 0)
         try:
             #Check if file exists, 000000xxx + 1
@@ -2693,7 +2643,7 @@ def updateValues(blank=False):
     global minuteState
     global ssdt
     if blank: return #blank is just a set up. If thread is already running, return
-    SM.getValues()
+    SM.getValues(valueHandler=window.SaveSettings)
 
     printH("CableUpdate: Online", 0)
     LRLibrary.UpdateLibrary()
@@ -2728,11 +2678,11 @@ def updateValues(blank=False):
     sleep(0.1)
     printH("CableUpdate: Waiting for new minute...", 0)
     #synchronize to a minute
-    while datetime.now().time().second != 0 and not ssdt.running() and False:
+    while datetime.now().time().second != 0 and not ssdt.running():
         if forceCableUpdate or not cableUpdateEnabled: break
-        window.updateLabelCounter(window.auto_label_1, str((timedelta(minutes=1) - timedelta(seconds=datetime.now().time().second)).seconds).zfill(2), 'minute sync')
+        window.updateLabelCounter(window.l_plcInterval, str((timedelta(minutes=1) - timedelta(seconds=datetime.now().time().second)).seconds).zfill(2), 'minute sync')
         sleep(1)
-    window.updateLabelCounter(window.auto_label_1, str(0).zfill(2))
+    window.updateLabelCounter(window.l_plcInterval, str(0).zfill(2))
     if not cableUpdateEnabled and not forceCableUpdate: return
     window.dsb_plcInterval.setEnabled(False)
     #window.tabWidget_2.setTabEnabled(1, False)
@@ -2822,8 +2772,8 @@ def updateValues(blank=False):
             print("Wait: Enter")
             while currentTime < nextTime or saveInProgress:
                 newLabelTime = str((nextTime - timedelta(seconds=datetime.now().time().second)).second).zfill(2)
-                if window.auto_label_1.text() != newLabelTime:
-                    window.updateLabelCounter(window.auto_label_1, newLabelTime)
+                if window.l_plcInterval.text() != newLabelTime:
+                    window.updateLabelCounter(window.l_plcInterval, newLabelTime)
                     sleep(1)
                 currentTime = datetime.now()
                 if currentTime.time().hour == 0 and currentTime.time().minute == 0:
@@ -2831,7 +2781,7 @@ def updateValues(blank=False):
                     break
                 if forceCableUpdate or not cableUpdateEnabled: break
             updateInProgress = True
-            window.updateLabelCounter(window.auto_label_1, str(0).zfill(2))
+            window.updateLabelCounter(window.l_plcInterval, str(0).zfill(2))
             print("Wait: Exit")
 
 
