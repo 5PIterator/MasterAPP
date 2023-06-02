@@ -1,0 +1,666 @@
+
+2023:06:02/11:47:21: Startup - (MasterAPP)
+
+2023:06:02/11:49:57: Startup - (MasterAPP)
+
+2023:06:02/11:50:15: Startup - (MasterAPP)
+
+2023:06:02/11:50:15: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+
+2023:06:02/11:50:26: Startup - (MasterAPP)
+
+2023:06:02/11:50:26: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/11:50:30: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/11:50:30: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/11:50:31: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/11:50:31: CableUpdate: Start! - 
+  — Completed in 0.0s - 
+
+2023:06:02/11:51:19: Restarting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+  — Completed in 0.0s - 
+  — Completed in 0.0s - 
+
+2023:06:02/12:05:04: Startup - (MasterAPP)
+
+2023:06:02/12:05:07: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:05:07: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/12:05:09: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:05:09: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:05:09: CableUpdate: Start! - 
+  — Completed in 0.0s - 
+
+2023:06:02/12:18:09: Startup - (MasterAPP)
+
+2023:06:02/12:18:09: Connection failed. No clients selected. - 
+
+2023:06:02/12:18:19: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:18:19: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/12:18:20: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:18:20: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:18:20: CableUpdate: Start! - 
+  — Completed in 0.0s - 
+
+2023:06:02/12:23:32: Startup - (MasterAPP)
+
+2023:06:02/12:23:36: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:23:36: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/12:23:37: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:23:38: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:23:38: CableUpdate: Start! - 
+  — Completed in 0.0s - 
+
+2023:06:02/12:28:12: Startup - (MasterAPP)
+
+2023:06:02/12:28:28: Connection failed. No clients selected. - 
+
+2023:06:02/12:28:55: Cleanup: - 
+  — Clients/Servers Stopped - 
+
+2023:06:02/12:29:46: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:29:46: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/12:29:47: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:29:47: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:29:47: CableUpdate: Start! - 
+
+2023:06:02/12:33:17: Startup - (MasterAPP)
+
+2023:06:02/12:33:17: Connection failed. No clients selected. - 
+
+2023:06:02/12:33:25: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:33:25: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/12:33:26: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:33:26: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:33:26: CableUpdate: Start! - 
+
+2023:06:02/12:33:56: Cable Update terminated. - 
+
+2023:06:02/12:33:56: Connection failed. No clients selected. - 
+
+2023:06:02/12:36:47: Restarting clients - 
+    — PLC client - 
+  — Completed in 0.0s - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:36:48: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:36:48: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:36:48: CableUpdate: Start! - 
+  — Completed in 0.0s - 
+
+2023:06:02/12:37:18: Cable Update terminated. - 
+
+2023:06:02/12:37:18: Connection failed. No clients selected. - 
+
+2023:06:02/12:39:37: Startup - (MasterAPP)
+
+2023:06:02/12:39:37: Connection failed. No clients selected. - 
+
+2023:06:02/12:39:46: Cleanup: - 
+  — Clients/Servers Stopped - 
+
+2023:06:02/12:39:54: Connection failed. No clients selected. - 
+
+2023:06:02/12:40:11: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:40:11: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/12:40:12: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:40:12: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:40:12: CableUpdate: Start! - 
+
+2023:06:02/12:40:42: Cable Update terminated. - 
+
+2023:06:02/12:40:42: Connection failed. No clients selected. - 
+
+2023:06:02/12:40:42: Connection failed. No clients selected. - 
+
+2023:06:02/12:45:22: Startup - (MasterAPP)
+
+2023:06:02/12:45:22: Connection failed. No clients selected. - 
+
+2023:06:02/12:45:27: Cleanup: - 
+  — Clients/Servers Stopped - 
+
+2023:06:02/12:46:10: Startup - (MasterAPP)
+
+2023:06:02/12:46:10: Connection failed. No clients selected. - 
+
+2023:06:02/12:46:17: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:46:18: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/12:46:18: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:46:19: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:46:19: CableUpdate: Start! - 
+
+2023:06:02/12:49:47: Startup - (MasterAPP)
+
+2023:06:02/12:49:47: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:49:48: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/12:49:48: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:49:49: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:49:49: CableUpdate: Start! - 
+  — Completed in 0.0s - 
+
+2023:06:02/12:51:16: Cable Update terminated. - 
+
+2023:06:02/12:51:16: Connection failed. No clients selected. - 
+
+2023:06:02/12:51:20: Startup - (MasterAPP)
+
+2023:06:02/12:51:20: Connection failed. No clients selected. - 
+
+2023:06:02/12:51:24: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:51:24: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/12:51:25: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:51:25: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:51:25: CableUpdate: Start! - 
+
+2023:06:02/12:52:28: Startup - (MasterAPP)
+
+2023:06:02/12:52:28: Connection failed. No clients selected. - 
+
+2023:06:02/12:52:33: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:52:33: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/12:52:34: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:52:34: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:52:34: CableUpdate: Start! - 
+
+2023:06:02/12:52:39: Cable Update terminated. - 
+
+2023:06:02/12:52:39: Connection failed. No clients selected. - 
+
+2023:06:02/12:52:55: Restarting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:52:55: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:52:56: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:52:56: CableUpdate: Start! - 
+  — Completed in 0.0s - 
+
+2023:06:02/12:53:06: Cable Update terminated. - 
+
+2023:06:02/12:53:06: Connection failed. No clients selected. - 
+
+2023:06:02/12:53:08: Connection failed. No clients selected. - 
+
+2023:06:02/12:53:17: Cleanup: - 
+  — Clients/Servers Stopped - 
+
+2023:06:02/12:53:19: Connection failed. No clients selected. - 
+
+2023:06:02/12:53:21: Cleanup: - 
+  — Clients/Servers Stopped - 
+  — Retry interrupted - 
+
+2023:06:02/12:53:28: Restarting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:53:29: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:53:29: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:53:29: CableUpdate: Start! - 
+
+2023:06:02/12:53:32: Restarting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:53:37: Cleanup: - 
+  — Clients/Servers Stopped - 
+
+2023:06:02/12:53:37: Cable Update terminated. - 
+
+2023:06:02/12:59:40: Startup - (MasterAPP)
+
+2023:06:02/12:59:40: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/12:59:41: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/12:59:41: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/12:59:42: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/12:59:42: CableUpdate: Start! - 
+
+2023:06:02/13:01:50: Startup - (MasterAPP)
+
+2023:06:02/13:01:50: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/13:01:50: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/13:01:51: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/13:01:51: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/13:01:51: CableUpdate: Start! - 
+
+2023:06:02/13:05:25: Startup - (MasterAPP)
+
+2023:06:02/13:05:26: Starting clients - 
+    — PLC client - 
+      — Connecting to Address... - (MasterAPP ----> 192.168.0.186:502)
+        — Success! - (MasterAPP <---> 192.168.0.186:502)
+      — Connecting to PLC... - (192.168.0.186:502 ----> PLC)
+        — StateOnly mode!
+No additional information will be attempted to be retrieved. - (192.168.0.186:502 <---> Quido <-X-> PLC)
+  — PLC Connection successfully estabilished with: 192.168.0.186 - (Test success)
+
+2023:06:02/13:05:26: Updating Cable objects... - 
+    — Received cable count: 4 - (Preset cable count: 4)
+  — Registering new cables... - (4 cables)
+    — Cable0 registered - (1/4)
+    — Cable1 registered - (2/4)
+    — Cable2 registered - (3/4)
+    — Cable3 registered - (4/4)
+  — Updating Graphs. - 
+
+2023:06:02/13:05:27: CableUpdate: Online - 
+    — Received Cable0 - (Response: [2, 0, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable0 State set on OFFLINE - 
+    — Received Cable1 - (Response: [2, 1, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable1 State set on OFFLINE - 
+    — Received Cable2 - (Response: [2, 2, [False, False, False, False, False, False, False], [0, 0], [0, 0]])
+                    — Cable2 State set on OFFLINE - 
+    — Received Cable3 - (Response: [2, 3, [False, False, False, False, False, False, False], [0, 0], [0]])
+                    — Cable3 State set on OFFLINE - 
+
+2023:06:02/13:05:27: CableUpdate: Waiting for new minute... - 
+
+2023:06:02/13:05:27: CableUpdate: Start! - 
+
+2023:06:02/13:05:53: Cable Update terminated. - 
+
+2023:06:02/13:05:53: Connection failed. No clients selected. - 
+
+2023:06:02/13:14:49: Startup - (MasterAPP)
+
+2023:06:02/13:14:49: Connection failed. No clients selected. - 
+
+2023:06:02/13:19:18: Startup - (MasterAPP)
+
+2023:06:02/13:19:18: Connection failed. No clients selected. - 

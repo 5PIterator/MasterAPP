@@ -173,7 +173,7 @@ QTabBar::tab {
 }</string>
                   </property>
                   <property name="currentIndex">
-                   <number>2</number>
+                   <number>0</number>
                   </property>
                   <widget class="QWidget" name="MainTab">
                    <property name="styleSheet">
@@ -253,7 +253,7 @@ QTabBar::tab {
                         <item>
                          <widget class="QGroupBox" name="groupBox_2">
                           <property name="sizePolicy">
-                           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                             <horstretch>0</horstretch>
                             <verstretch>0</verstretch>
                            </sizepolicy>
@@ -267,6 +267,15 @@ QTabBar::tab {
                           </property>
                           <property name="title">
                            <string>External Temperatures</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignCenter</set>
+                          </property>
+                          <property name="flat">
+                           <bool>true</bool>
+                          </property>
+                          <property name="checkable">
+                           <bool>false</bool>
                           </property>
                           <layout class="QGridLayout" name="gridLayout_7">
                            <property name="leftMargin">
@@ -844,6 +853,12 @@ border-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QLineEdit" name="le_apiAddress">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
                              <property name="minimumSize">
                               <size>
                                <width>140</width>
@@ -882,6 +897,12 @@ border-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QLineEdit" name="le_apiPort">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
                              <property name="minimumSize">
                               <size>
                                <width>0</width>
@@ -968,6 +989,12 @@ border-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QLineEdit" name="le_plcAddress">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
                              <property name="minimumSize">
                               <size>
                                <width>140</width>
@@ -1006,6 +1033,12 @@ border-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QLineEdit" name="le_plcPort">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
                              <property name="minimumSize">
                               <size>
                                <width>0</width>
@@ -1127,6 +1160,12 @@ border-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QLineEdit" name="le_axAddress">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
                              <property name="minimumSize">
                               <size>
                                <width>140</width>
@@ -1165,6 +1204,12 @@ border-color: rgb(255, 255, 255);</string>
                            </item>
                            <item>
                             <widget class="QLineEdit" name="le_axPort">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
                              <property name="minimumSize">
                               <size>
                                <width>0</width>
@@ -1245,6 +1290,12 @@ border-color: rgb(255, 255, 255);</string>
                            <property name="enabled">
                             <bool>false</bool>
                            </property>
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="minimumSize">
                             <size>
                              <width>63</width>
@@ -1320,6 +1371,12 @@ border-color: rgb(255, 255, 255);</string>
                          </item>
                          <item row="3" column="2">
                           <widget class="QDoubleSpinBox" name="dsb_plcInterval">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="minimumSize">
                             <size>
                              <width>63</width>
@@ -1366,6 +1423,12 @@ border-color: rgb(255, 255, 255);</string>
                            <property name="enabled">
                             <bool>false</bool>
                            </property>
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="minimumSize">
                             <size>
                              <width>63</width>
@@ -1409,6 +1472,12 @@ border-color: rgb(255, 255, 255);</string>
                          </item>
                          <item row="0" column="2">
                           <widget class="QSpinBox" name="sb_retryInterval">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="minimumSize">
                             <size>
                              <width>63</width>
@@ -1553,6 +1622,9 @@ border-color: rgb(255, 255, 255);</string>
                         <property name="title">
                          <string>MasterAPP</string>
                         </property>
+                        <property name="alignment">
+                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                        </property>
                         <property name="flat">
                          <bool>true</bool>
                         </property>
@@ -1568,6 +1640,12 @@ border-color: rgb(255, 255, 255);</string>
                          </property>
                          <item row="1" column="2">
                           <widget class="QPushButton" name="pb_retry">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="toolTip">
                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button manually restarts the MasterApp Clients during runtime.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                            </property>
@@ -1601,6 +1679,12 @@ border-color: rgb(255, 255, 255);</string>
                          </item>
                          <item row="6" column="2">
                           <widget class="QPushButton" name="pb_changeDir">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="toolTip">
                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button opens option to set new directory.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                            </property>
@@ -1665,6 +1749,12 @@ border-color: rgb(255, 255, 255);</string>
                          </item>
                          <item row="3" column="2">
                           <widget class="QPushButton" name="pb_updateCables">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="toolTip">
                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button manually updates cables, or triggers the automatic PLC Cable update&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                            </property>
@@ -1700,6 +1790,12 @@ border-color: rgb(255, 255, 255);</string>
                          </item>
                          <item row="2" column="2">
                           <widget class="QPushButton" name="pb_stopClients">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="toolTip">
                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button interrupts retry and disables listeners and update loop.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                            </property>
@@ -1759,24 +1855,14 @@ border-color: rgb(255, 255, 255);</string>
                            </property>
                           </widget>
                          </item>
-                         <item row="4" column="2">
-                          <widget class="QSpinBox" name="sb_cableCount">
-                           <property name="enabled">
-                            <bool>false</bool>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">background-color:white</string>
-                           </property>
-                           <property name="alignment">
-                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                           </property>
-                           <property name="value">
-                            <number>4</number>
-                           </property>
-                          </widget>
-                         </item>
                          <item row="0" column="2">
                           <widget class="QPushButton" name="pb_startClients">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="toolTip">
                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button manually starts the MasterApp Clients.&lt;/p&gt;&lt;p&gt;1. Tests connection for enabled addresses&lt;/p&gt;&lt;p&gt;2. Starts listeners&lt;/p&gt;&lt;p&gt;3. Updates cables from enabled servers&lt;/p&gt;&lt;p&gt;4. PLC update loop, and listens for API updates&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                            </property>
@@ -1852,19 +1938,6 @@ border-color: rgb(255, 255, 255);</string>
                            </property>
                           </widget>
                          </item>
-                         <item row="6" column="3">
-                          <widget class="QLabel" name="l_workloadPath">
-                           <property name="styleSheet">
-                            <string notr="true">background-color:transparent</string>
-                           </property>
-                           <property name="text">
-                            <string>/Workload</string>
-                           </property>
-                           <property name="alignment">
-                            <set>Qt::AlignCenter</set>
-                           </property>
-                          </widget>
-                         </item>
                          <item row="1" column="0">
                           <widget class="QLabel" name="label_15">
                            <property name="toolTip">
@@ -1891,6 +1964,54 @@ border-color: rgb(255, 255, 255);</string>
                            </property>
                           </widget>
                          </item>
+                         <item row="4" column="2">
+                          <layout class="QHBoxLayout" name="horizontalLayout_2">
+                           <item>
+                            <spacer name="horizontalSpacer_6">
+                             <property name="orientation">
+                              <enum>Qt::Horizontal</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>40</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                           <item>
+                            <widget class="QSpinBox" name="sb_cableCount">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>20</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">background-color:white</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                             </property>
+                             <property name="buttonSymbols">
+                              <enum>QAbstractSpinBox::NoButtons</enum>
+                             </property>
+                             <property name="value">
+                              <number>4</number>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
                         </layout>
                        </widget>
                        <widget class="QGroupBox" name="groupBox_3">
@@ -1899,7 +2020,7 @@ border-color: rgb(255, 255, 255);</string>
                           <x>0</x>
                           <y>460</y>
                           <width>491</width>
-                          <height>121</height>
+                          <height>111</height>
                          </rect>
                         </property>
                         <property name="font">
@@ -1934,82 +2055,18 @@ border-color: rgb(255, 255, 255);</string>
                          <property name="spacing">
                           <number>0</number>
                          </property>
-                         <item row="3" column="0">
-                          <spacer name="verticalSpacer_9">
-                           <property name="orientation">
-                            <enum>Qt::Vertical</enum>
+                         <item row="0" column="0">
+                          <widget class="QLabel" name="label_18">
+                           <property name="toolTip">
+                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This variable controls the address and port of the domain where MasterAPP will send data of the state of the cables.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                            </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>20</width>
-                             <height>40</height>
-                            </size>
+                           <property name="styleSheet">
+                            <string notr="true">background-color:transparent</string>
                            </property>
-                          </spacer>
-                         </item>
-                         <item row="0" column="1">
-                          <spacer name="horizontalSpacer_3">
-                           <property name="orientation">
-                            <enum>Qt::Horizontal</enum>
+                           <property name="text">
+                            <string>Domain:</string>
                            </property>
-                           <property name="sizeHint" stdset="0">
-                            <size>
-                             <width>40</width>
-                             <height>20</height>
-                            </size>
-                           </property>
-                          </spacer>
-                         </item>
-                         <item row="0" column="3">
-                          <layout class="QHBoxLayout" name="horizontalLayout_2">
-                           <item>
-                            <widget class="QLabel" name="l_domainHost">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="toolTip">
-                              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This variable controls the address and port of the domain where MasterAPP will send data of the state of the cables.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">background-color:transparent</string>
-                             </property>
-                             <property name="text">
-                              <string>wakearealy.cz</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLineEdit" name="le_areal">
-                             <property name="maximumSize">
-                              <size>
-                               <width>21</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="maxLength">
-                              <number>2</number>
-                             </property>
-                             <property name="frame">
-                              <bool>true</bool>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignJustify|Qt::AlignVCenter</set>
-                             </property>
-                             <property name="placeholderText">
-                              <string/>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
+                          </widget>
                          </item>
                          <item row="1" column="0">
                           <widget class="QLabel" name="label_17">
@@ -2021,29 +2078,6 @@ border-color: rgb(255, 255, 255);</string>
                            </property>
                            <property name="text">
                             <string>Save State of Quido:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="0" column="2">
-                          <widget class="QPushButton" name="pb_changeDomain">
-                           <property name="styleSheet">
-                            <string notr="true">background-color: rgb(255, 255, 255);</string>
-                           </property>
-                           <property name="text">
-                            <string>Change Domain</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="0" column="0">
-                          <widget class="QLabel" name="label_18">
-                           <property name="toolTip">
-                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This variable controls the address and port of the domain where MasterAPP will send data of the state of the cables.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">background-color:transparent</string>
-                           </property>
-                           <property name="text">
-                            <string>Domain:</string>
                            </property>
                           </widget>
                          </item>
@@ -2060,118 +2094,14 @@ border-color: rgb(255, 255, 255);</string>
                            </property>
                           </widget>
                          </item>
-                         <item row="1" column="3">
-                          <layout class="QHBoxLayout" name="horizontalLayout_6">
-                           <property name="spacing">
-                            <number>0</number>
-                           </property>
-                           <item>
-                            <widget class="QComboBox" name="cb_SaveStyle">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="toolTip">
-                              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Don't save - Will never save new data from quido&lt;/p&gt;&lt;p&gt;Only save - Will only save data from quido&lt;/p&gt;&lt;p&gt;Save and send one - Will save data from quido and send new to selected domain&lt;/p&gt;&lt;p&gt;Save and send all - Will save data from quido and send all to selected domain (in case data is not synchronized)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">QComboBox QAbstractItemView {
-background:white
-}</string>
-                             </property>
-                             <property name="currentText">
-                              <string>Don't save</string>
-                             </property>
-                             <property name="maxVisibleItems">
-                              <number>4</number>
-                             </property>
-                             <property name="maxCount">
-                              <number>4</number>
-                             </property>
-                             <property name="insertPolicy">
-                              <enum>QComboBox::NoInsert</enum>
-                             </property>
-                             <property name="sizeAdjustPolicy">
-                              <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-                             </property>
-                             <property name="iconSize">
-                              <size>
-                               <width>4</width>
-                               <height>4</height>
-                              </size>
-                             </property>
-                             <property name="frame">
-                              <bool>false</bool>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string>Don't save</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Only save</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Send one</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Send all</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLabel" name="l_saveStateTimer">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>21</width>
-                               <height>0</height>
-                              </size>
-                             </property>
-                             <property name="toolTip">
-                              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This variable shows when MasterAPP executes SaveStateData&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">background-color:transparent</string>
-                             </property>
-                             <property name="text">
-                              <string>00</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item row="1" column="2">
-                          <widget class="QPushButton" name="pb_SaveStateData">
-                           <property name="toolTip">
-                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button manually triggers save function.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">background-color: rgb(255, 255, 255);</string>
-                           </property>
-                           <property name="text">
-                            <string>SaveStateData</string>
-                           </property>
-                          </widget>
-                         </item>
                          <item row="2" column="3">
                           <widget class="QSpinBox" name="pb_MMState">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
                            <property name="toolTip">
                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This variable affects how MasterAPP evaluates whether Cable was running in a minute. (True)&lt;/p&gt;&lt;p&gt;1/60s - MasterAPP will evaluate True if it was ON a single second&lt;/p&gt;&lt;p&gt;60/60s - MasterAPP will only evaluate True if it was ON the whole minute&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                            </property>
@@ -2198,7 +2128,230 @@ background:white
                            </property>
                           </widget>
                          </item>
+                         <item row="3" column="0">
+                          <spacer name="verticalSpacer_9">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="0" column="1">
+                          <spacer name="horizontalSpacer_3">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>40</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="1" column="2">
+                          <widget class="QPushButton" name="pb_SaveStateData">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="toolTip">
+                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button manually triggers save function.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgb(255, 255, 255);</string>
+                           </property>
+                           <property name="text">
+                            <string>SaveStateData</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="2">
+                          <widget class="QPushButton" name="pb_changeDomain">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgb(255, 255, 255);</string>
+                           </property>
+                           <property name="text">
+                            <string>Change Domain</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="1" column="3">
+                          <widget class="QComboBox" name="cb_SaveStyle">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="toolTip">
+                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Don't save - Will never save new data from quido&lt;/p&gt;&lt;p&gt;Only save - Will only save data from quido&lt;/p&gt;&lt;p&gt;Save and send one - Will save data from quido and send new to selected domain&lt;/p&gt;&lt;p&gt;Save and send all - Will save data from quido and send all to selected domain (in case data is not synchronized)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">QComboBox QAbstractItemView {
+background:white
+}</string>
+                           </property>
+                           <property name="currentText">
+                            <string>Don't save</string>
+                           </property>
+                           <property name="maxVisibleItems">
+                            <number>4</number>
+                           </property>
+                           <property name="maxCount">
+                            <number>4</number>
+                           </property>
+                           <property name="insertPolicy">
+                            <enum>QComboBox::NoInsert</enum>
+                           </property>
+                           <property name="sizeAdjustPolicy">
+                            <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>4</width>
+                             <height>4</height>
+                            </size>
+                           </property>
+                           <property name="frame">
+                            <bool>false</bool>
+                           </property>
+                           <item>
+                            <property name="text">
+                             <string>Don't save</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>Only save</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>Send one</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>Send all</string>
+                            </property>
+                           </item>
+                          </widget>
+                         </item>
+                         <item row="0" column="3">
+                          <widget class="QLabel" name="l_domainHost">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="toolTip">
+                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This variable controls the address and port of the domain where MasterAPP will send data of the state of the cables.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color:transparent</string>
+                           </property>
+                           <property name="text">
+                            <string>wakearealy.cz</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="4">
+                          <widget class="QLineEdit" name="le_areal">
+                           <property name="maximumSize">
+                            <size>
+                             <width>21</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="maxLength">
+                            <number>2</number>
+                           </property>
+                           <property name="frame">
+                            <bool>true</bool>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+                           </property>
+                           <property name="placeholderText">
+                            <string/>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="1" column="4">
+                          <widget class="QLabel" name="l_saveStateTimer">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>21</width>
+                             <height>0</height>
+                            </size>
+                           </property>
+                           <property name="toolTip">
+                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This variable shows when MasterAPP executes SaveStateData&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color:transparent</string>
+                           </property>
+                           <property name="text">
+                            <string>00</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
+                         </item>
                         </layout>
+                       </widget>
+                       <widget class="QLabel" name="l_workloadPath">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>180</y>
+                          <width>471</width>
+                          <height>28</height>
+                         </rect>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">background-color:transparent</string>
+                        </property>
+                        <property name="text">
+                         <string>/Workload</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                        </property>
                        </widget>
                       </widget>
                      </widget>
@@ -2707,7 +2860,7 @@ background:white
  </customwidgets>
  <resources>
   <include location="Images.qrc"/>
-  <include location="../../Experimental version/ui/Images.qrc"/>
+  <include location="Images.qrc"/>
  </resources>
  <connections/>
 </ui>

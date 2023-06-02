@@ -64,13 +64,13 @@ class MainWindow(Ui_MasterAPP):
         self.le_plcPort.editingFinished.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
         self.le_axAddress.editingFinished.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
         self.le_axPort.editingFinished.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
-        self.cb_apiAllowed.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
-        self.cb_plcAllowed.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
-        self.cb_axAllowed.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
-        self.cb_auto_startClients.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
-        self.cb_auto_retry.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
-        self.cb_auto_cableUpdate.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
-        self.cb_auto_cableCount.stateChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_apiAllowed.clicked.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_plcAllowed.clicked.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_axAllowed.clicked.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_auto_startClients.clicked.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_auto_retry.clicked.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_auto_cableUpdate.clicked.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
+        self.cb_auto_cableCount.clicked.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
         self.cb_SaveStyle.currentIndexChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
         self.pb_MMState.valueChanged.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
         self.le_areal.editingFinished.connect(lambda: SM.getValues(valueHandler=self.SaveSettings))
@@ -121,7 +121,7 @@ class MainWindow(Ui_MasterAPP):
         SM.addSection('MAIN', 'masterAPP')
         SM.addOption('masterAPP', 'autoStart_allowed', autoStart_allowed, self.cb_auto_startClients)
         SM.addOption('masterAPP', 'autoRetry_allowed', autoRetry_allowed, self.cb_auto_retry)
-        SM.addOption('masterAPP', 'cableUpdateAllowed', cableUpdateAllowed)
+        #SM.addOption('masterAPP', 'cableUpdateAllowed', cableUpdateAllowed)
         SM.addOption('masterAPP', 'autoUpdate_allowed', autoUpdate_allowed, self.cb_auto_cableUpdate)
         SM.addOption('masterAPP', 'cableCount', cableCount, self.sb_cableCount)
         SM.addOption('masterAPP', 'retryInterval', retryInterval, self.sb_retryInterval)
@@ -169,6 +169,7 @@ class MainWindow(Ui_MasterAPP):
         global cableUpdate
         global cableUpdateEnabled
         global cableUpdateAllowed
+        global saveStateAllowed
         global domainHost
         global domainPort
         global domainUser
@@ -180,7 +181,7 @@ class MainWindow(Ui_MasterAPP):
         global areal
 
         if not checkSettings:
-            return
+            return SD
         checkSettings = False
 
         #plc.plc_getCableCount_allowed = SD["masterAPP"]["plc_getCableCount_allowed"][0]
@@ -191,7 +192,7 @@ class MainWindow(Ui_MasterAPP):
         api.idle_Interval = SD["api"]["idle_Interval"][0]
         autoUpdate_Interval = SD["plc"]["autoUpdate_Interval"][0]
         autoUpdate_allowed = SD["masterAPP"]["autoUpdate_allowed"][0]
-        cableUpdateAllowed = SD["masterAPP"]["cableUpdateAllowed"][0]
+        #cableUpdateAllowed = SD["masterAPP"]["cableUpdateAllowed"][0]
         ax.request_Interval = SD["ax"]["request_Interval"][0]
         ax.server_allowed = SD["ax"]["server_allowed"][0]
         saveStyle = SD["domain"]["saveStyle"][0]
@@ -212,6 +213,7 @@ class MainWindow(Ui_MasterAPP):
         else:
             cableUpdateEnabled = False
 
+        restart = False
         stop = False
         start = False
         if api.client_allowed != self.cb_apiAllowed.isChecked():
@@ -220,22 +222,21 @@ class MainWindow(Ui_MasterAPP):
             elif self.cb_apiAllowed.isChecked():
                 start = True
             else:
-                stop = True
+                restart = True
 
         if plc.client_allowed != self.cb_plcAllowed.isChecked():
             if not (api.api_retry_success or plc.plc_retry_success):
                 plc.client_allowed = self.cb_plcAllowed.isChecked()
-            elif self.cb_plcAllowed.isChecked():
+            elif self.cb_apiAllowed.isChecked():
                 start = True
             else:
-                stop = True
+                restart = True
 
         if not (api.client_allowed or plc.client_allowed or ax.server_allowed):
             self.pb_retry.setEnabled(False)
         elif not self.pb_startClients.isEnabled():
             self.pb_retry.setEnabled(True)
 
-        restart = False
         if api.host != self.le_apiAddress.text():  # API Address(host)
             if self.le_apiAddress.text() != '':
                 api.host = self.le_apiAddress.text()
@@ -305,8 +306,13 @@ class MainWindow(Ui_MasterAPP):
             root.withdraw()
             if messagebox.askokcancel("Confirm Action", "Variables of either API or PLC have been changed during runtime. \nThis change can only be implemented after restart. \n\nDo you wish to proceed?"):
                 stopClients = True
-                sleep(1)
+                cableUpdateAllowed = False
+                saveStateAllowed = False
+                while cableUpdate.running() or ssdt.running():
+                    pass
                 stopClients = False
+                cableUpdateAllowed = True
+                saveStateAllowed = True
                 api.client_allowed = self.cb_apiAllowed.isChecked()
                 plc.client_allowed = self.cb_plcAllowed.isChecked()
 
@@ -2053,7 +2059,7 @@ def saveStateDataTimer(blank: bool = False):
 
             if backupInterval < autoUpdate_Interval:
                 printH("Resuming regular update rate (-1s).", 1)
-                window.dsb_plcInterval.setValue(float(window.dsb_plcInterval.value() - 1))
+                window.dsb_plcInterval.setValue(float(window.dsb_plcInterval.value() - 1)) #! thread conflict!
                 autoUpdate_Interval = window.dsb_plcInterval.value()
 
             saveInProgress = False
@@ -2678,7 +2684,7 @@ def updateValues(blank=False):
     sleep(0.1)
     printH("CableUpdate: Waiting for new minute...", 0)
     #synchronize to a minute
-    while datetime.now().time().second != 0 and not ssdt.running():
+    while datetime.now().time().second != 0 and not ssdt.running() and False:
         if forceCableUpdate or not cableUpdateEnabled: break
         window.updateLabelCounter(window.l_plcInterval, str((timedelta(minutes=1) - timedelta(seconds=datetime.now().time().second)).seconds).zfill(2), 'minute sync')
         sleep(1)
@@ -2779,7 +2785,7 @@ def updateValues(blank=False):
                 if currentTime.time().hour == 0 and currentTime.time().minute == 0:
                     window.StopButton(True)
                     break
-                if forceCableUpdate or not cableUpdateEnabled: break
+                if forceCableUpdate or not (cableUpdateEnabled and cableUpdateAllowed): break
             updateInProgress = True
             window.updateLabelCounter(window.l_plcInterval, str(0).zfill(2))
             print("Wait: Exit")
