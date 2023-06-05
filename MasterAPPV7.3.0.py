@@ -1,4 +1,4 @@
-#pyinstaller --onefile MasterAPPV6.0.py
+# pyinstaller --onefile --distpath G:\My' 'Drive\MasterAPPEXE MasterAPPV7.3.0.py
 # Bugs:
 # Sometimes the background disappears and defaults into white background.
 # Retry change crashed once
