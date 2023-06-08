@@ -722,8 +722,8 @@ class MainWindow(Ui_MasterAPP):
     def ChangeDomainButton(self):
         dialogWindow.show()
         dialogWindow.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
-        dialog.buttonBox.accepted.connect(self.ChangeDomainResult)
-    def ChangeDomainResult(self):
+        dialog.buttonBox.accepted.connect(self.ChangeDomaIREGsult)
+    def ChangeDomaIREGsult(self):
         global domainHost
         global domainPort
         global domainUser
@@ -2656,10 +2656,10 @@ def updateValues(blank=False):
     cableUpdateInterrupt = False
 
     # Get first values
-    statV = LRLibrary.getRegisters("PLC", "DIIN", 0, 7)
-    riderV = LRLibrary.getRegisters("PLC", "DIIN", 8, 7)
-    tempV = LRLibrary.getRegisters("PLC", "INRE", 1, 2)
-    cableV = LRLibrary.getRegisters("PLC", "HORE", 0, cableCount*3)
+    statV = LRLibrary.getRegisters("PLC", "DINP", 0, 7)
+    riderV = LRLibrary.getRegisters("PLC", "DINP", 8, 7)
+    tempV = LRLibrary.getRegisters("PLC", "IREG", 1, 2)
+    cableV = LRLibrary.getRegisters("PLC", "HREG", 0, cableCount*3)
 
     for i in range(cableCount):
         item:list = []
@@ -2724,10 +2724,10 @@ def updateValues(blank=False):
 
             start_time = time()
             # Update values
-            statV = LRLibrary.getRegisters("PLC", "DIIN", 0, 7)
-            riderV = LRLibrary.getRegisters("PLC", "DIIN", 8, 7)
-            tempV = LRLibrary.getRegisters("PLC", "INRE", 1, 2)
-            cableV = LRLibrary.getRegisters("PLC", "HORE", 0, cableCount*3)
+            statV = LRLibrary.getRegisters("PLC", "DINP", 0, 7)
+            riderV = LRLibrary.getRegisters("PLC", "DINP", 8, 7)
+            tempV = LRLibrary.getRegisters("PLC", "IREG", 1, 2)
+            cableV = LRLibrary.getRegisters("PLC", "HREG", 0, cableCount*3)
             if (statV, riderV, tempV, cableV) != (statVLast, riderVLast, tempVLast, cableVLast):
                 Watcher2 = time()
                 start_timeb = time()
