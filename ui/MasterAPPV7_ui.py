@@ -1297,4 +1297,3 @@ class Ui_MasterAPP(object):
         item.setText(_translate("MasterAPP", "X 0000"))
         self.tableWidget_1.setSortingEnabled(__sortingEnabled)
 from pyqtgraph import PlotWidget
-import Images_rc
