@@ -1,4 +1,6 @@
-
+'''
+pyinstaller --onefile --distpath G:\My' 'Drive\MasterAPPEXE --windowed MasterAPPV65.0.pyw
+'''
 # Bugs:
 # Sometimes the background disappears and defaults into white background.
 # Retry change crashed once

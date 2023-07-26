@@ -457,6 +457,7 @@ def cableUpdateDelay(index, newCableDict):
     global cableList
     time.sleep(random.randrange(5, 15))
     cableList[index] = newCableDict
+    #Quido.write_multiple_registers(0, [random])
 
 
 threadpool = ThreadPoolExecutor(5)
@@ -465,7 +466,7 @@ threadpool.submit(cableSimulation)
 plcWindow = QtWidgets.QWidget()
 plcWindow.setGeometry(1200, 570, 500, 400,)
 plc = MainWindow(plcWindow)
-#plc.plc_server.start()
+threadpool.submit(plc.plc_server.start)
 timer = QTimer()
 timer.timeout.connect(plc.updateDataBank)
 timer.timeout.connect(api.updateDataBank)

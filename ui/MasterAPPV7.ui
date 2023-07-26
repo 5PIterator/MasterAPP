@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1103</width>
-    <height>629</height>
+    <width>1285</width>
+    <height>795</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -84,8 +84,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1101</width>
-         <height>627</height>
+         <width>1283</width>
+         <height>793</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -95,7 +95,7 @@
         </sizepolicy>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="1" column="0">
+        <item row="0" column="0">
          <widget class="QSplitter" name="splitter">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -169,6 +169,10 @@
 }
 
 QTabBar::tab {
+    background: rgba(0, 0, 0, 0);
+}
+
+QTabBar::tab::selected {
     background: rgba(255, 255, 255, 150);
 }</string>
                   </property>
@@ -204,7 +208,7 @@ QTabBar::tab {
                        <number>0</number>
                       </property>
                       <property name="bottomMargin">
-                       <number>0</number>
+                       <number>30</number>
                       </property>
                       <item>
                        <layout class="QHBoxLayout" name="horizontalLayout_17">
@@ -419,14 +423,14 @@ QTabBar::tab {
                         <attribute name="horizontalHeaderCascadingSectionResizes">
                          <bool>true</bool>
                         </attribute>
+                        <attribute name="horizontalHeaderMinimumSectionSize">
+                         <number>200</number>
+                        </attribute>
                         <attribute name="horizontalHeaderDefaultSectionSize">
                          <number>260</number>
                         </attribute>
                         <attribute name="horizontalHeaderHighlightSections">
                          <bool>false</bool>
-                        </attribute>
-                        <attribute name="horizontalHeaderMinimumSectionSize">
-                         <number>200</number>
                         </attribute>
                         <attribute name="verticalHeaderVisible">
                          <bool>false</bool>
@@ -434,14 +438,14 @@ QTabBar::tab {
                         <attribute name="verticalHeaderCascadingSectionResizes">
                          <bool>true</bool>
                         </attribute>
+                        <attribute name="verticalHeaderMinimumSectionSize">
+                         <number>60</number>
+                        </attribute>
                         <attribute name="verticalHeaderDefaultSectionSize">
                          <number>60</number>
                         </attribute>
                         <attribute name="verticalHeaderHighlightSections">
                          <bool>false</bool>
-                        </attribute>
-                        <attribute name="verticalHeaderMinimumSectionSize">
-                         <number>60</number>
                         </attribute>
                         <row>
                          <property name="text">
@@ -549,22 +553,6 @@ QTabBar::tab {
                         </item>
                        </widget>
                       </item>
-                      <item>
-                       <spacer name="verticalSpacer">
-                        <property name="orientation">
-                         <enum>Qt::Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                         <enum>QSizePolicy::Maximum</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>0</width>
-                          <height>24</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
                      </layout>
                     </item>
                    </layout>
@@ -614,8 +602,8 @@ QTabBar::tab {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>500</width>
-                         <height>582</height>
+                         <width>189</width>
+                         <height>117</height>
                         </rect>
                        </property>
                        <layout class="QGridLayout" name="gridLayout_4">
@@ -791,8 +779,8 @@ selection-background-color:transparent;
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>500</width>
-                         <height>582</height>
+                         <width>98</width>
+                         <height>28</height>
                         </rect>
                        </property>
                        <widget class="QGroupBox" name="ServerGroupBox">
@@ -2397,11 +2385,11 @@ background:white
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>500</width>
-                         <height>582</height>
+                         <width>77</width>
+                         <height>200</height>
                         </rect>
                        </property>
-                       <layout class="QVBoxLayout" name="verticalLayout_6">
+                       <layout class="QVBoxLayout" name="verticalLayout_2">
                         <property name="spacing">
                          <number>0</number>
                         </property>
@@ -2420,28 +2408,28 @@ background:white
                         <item>
                          <widget class="PlotWidget" name="pg_workload_1" native="true">
                           <property name="sizePolicy">
-                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                             <horstretch>0</horstretch>
                             <verstretch>0</verstretch>
                            </sizepolicy>
                           </property>
-                          <property name="maximumSize">
+                          <property name="minimumSize">
                            <size>
-                            <width>16777215</width>
-                            <height>130</height>
+                            <width>0</width>
+                            <height>200</height>
                            </size>
                           </property>
                          </widget>
                         </item>
                         <item>
-                         <spacer name="verticalSpacer_5">
+                         <spacer name="verticalSpacer">
                           <property name="orientation">
                            <enum>Qt::Vertical</enum>
                           </property>
                           <property name="sizeHint" stdset="0">
                            <size>
                             <width>20</width>
-                            <height>40</height>
+                            <height>542</height>
                            </size>
                           </property>
                          </spacer>
@@ -2507,8 +2495,8 @@ background:white
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>571</width>
-                 <height>586</height>
+                 <width>465</width>
+                 <height>748</height>
                 </rect>
                </property>
                <property name="sizePolicy">
@@ -2662,20 +2650,20 @@ background:white
                      <attribute name="horizontalHeaderVisible">
                       <bool>false</bool>
                      </attribute>
-                     <attribute name="horizontalHeaderDefaultSectionSize">
-                      <number>250</number>
-                     </attribute>
                      <attribute name="horizontalHeaderMinimumSectionSize">
                       <number>200</number>
+                     </attribute>
+                     <attribute name="horizontalHeaderDefaultSectionSize">
+                      <number>250</number>
                      </attribute>
                      <attribute name="verticalHeaderVisible">
                       <bool>false</bool>
                      </attribute>
-                     <attribute name="verticalHeaderDefaultSectionSize">
-                      <number>60</number>
-                     </attribute>
                      <attribute name="verticalHeaderMinimumSectionSize">
                       <number>50</number>
+                     </attribute>
+                     <attribute name="verticalHeaderDefaultSectionSize">
+                      <number>60</number>
                      </attribute>
                      <row>
                       <property name="text">
@@ -2858,6 +2846,47 @@ background:white
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget_2</tabstop>
+  <tabstop>historyScrollArea</tabstop>
+  <tabstop>historyList</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>scrollArea_2</tabstop>
+  <tabstop>tableWidget</tabstop>
+  <tabstop>CableScrollArea</tabstop>
+  <tabstop>tableWidget_1</tabstop>
+  <tabstop>historyButton</tabstop>
+  <tabstop>historyButton_2</tabstop>
+  <tabstop>pb_startClients</tabstop>
+  <tabstop>cb_auto_startClients</tabstop>
+  <tabstop>pb_retry</tabstop>
+  <tabstop>cb_auto_retry</tabstop>
+  <tabstop>pb_stopClients</tabstop>
+  <tabstop>pb_updateCables</tabstop>
+  <tabstop>cb_auto_cableUpdate</tabstop>
+  <tabstop>sb_cableCount</tabstop>
+  <tabstop>cb_auto_cableCount</tabstop>
+  <tabstop>pb_changeDir</tabstop>
+  <tabstop>le_apiAddress</tabstop>
+  <tabstop>le_apiPort</tabstop>
+  <tabstop>cb_apiAllowed</tabstop>
+  <tabstop>le_plcAddress</tabstop>
+  <tabstop>le_plcPort</tabstop>
+  <tabstop>cb_plcAllowed</tabstop>
+  <tabstop>le_axAddress</tabstop>
+  <tabstop>le_axPort</tabstop>
+  <tabstop>cb_axAllowed</tabstop>
+  <tabstop>sb_retryInterval</tabstop>
+  <tabstop>dsb_apiInterval</tabstop>
+  <tabstop>dsb_axInterval</tabstop>
+  <tabstop>dsb_plcInterval</tabstop>
+  <tabstop>pb_changeDomain</tabstop>
+  <tabstop>le_areal</tabstop>
+  <tabstop>pb_SaveStateData</tabstop>
+  <tabstop>cb_SaveStyle</tabstop>
+  <tabstop>pb_MMState</tabstop>
+  <tabstop>masterScrollArea</tabstop>
+ </tabstops>
  <resources>
   <include location="Images.qrc"/>
   <include location="Images.qrc"/>

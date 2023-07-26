@@ -100,7 +100,7 @@ def getValues(saveToFile:bool=True, exprSettings:bool=False, valueHandler=None):
             if option == "FILE": continue
             # synchronization
             widgetType = type(settingsDict[section][option][1])
-            if widgetType == QtWidgets.QLineEdit:
+            if widgetType == QtWidgets.QLineEdit or widgetType == QtWidgets.QLabel:
                 settingsDict[section][option][0] = str(settingsDict[section][option][1].text())
             elif widgetType == QtWidgets.QSpinBox:
                 settingsDict[section][option][0] = int(settingsDict[section][option][1].value())

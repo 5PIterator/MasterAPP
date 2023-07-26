@@ -85,8 +85,8 @@ class LRLClient():
         self._localCoils = [False for _ in range(self._highestAddress)]
 
 busy = False
-readTime = 0
-writeTime = 0
+readTime:float = 0
+writeTime:float = 0
 clientList = {}
 
 def add_client(
@@ -194,8 +194,8 @@ def ReadLibrary(client:LRLClient, fromUpdate=False):
                 if not client.get_client().open():
                     return False
             if client._readHoldingRegisters: holdingReg.extend(client.get_client().read_holding_registers(i, client._transferSize))
-            if client._readInputRegisters: inputReg.extend(client.get_client().read_discrete_inputs(i, client._transferSize))
-            if client._readDiscreteInputs: discreteIn.extend(client.get_client().read_input_registers(i, client._transferSize))
+            if client._readInputRegisters: inputReg.extend(client.get_client().read_input_registers(i, client._transferSize))
+            if client._readDiscreteInputs: discreteIn.extend(client.get_client().read_discrete_inputs(i, client._transferSize))
             if client._readCoils: coils.extend(client.get_client().read_coils(i, client._transferSize))
         except:
             t += 1
@@ -203,8 +203,8 @@ def ReadLibrary(client:LRLClient, fromUpdate=False):
             i += client._transferSize
             t = 0
     if client._readHoldingRegisters: client._localHoldingRegisters = holdingReg
-    if client._readInputRegisters: client._localDiscreteInputs = inputReg
-    if client._readDiscreteInputs: client._localInputRegisters = discreteIn
+    if client._readInputRegisters: client._localInputRegisters = inputReg
+    if client._readDiscreteInputs: client._localDiscreteInputs = discreteIn
     if client._readCoils: client._localCoils = coils
     readTime = time() - start_time
 
