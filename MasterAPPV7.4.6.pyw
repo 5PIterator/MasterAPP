@@ -1,5 +1,5 @@
 '''
-pyinstaller --onefile --distpath G:\My' 'Drive\MasterAPPEXE --windowed MasterAPPV7.4.0.pyw
+pyinstaller --onefile --distpath G:\My' 'Drive\MasterAPPEXE --windowed MasterAPPV7.4.2.pyw
 '''
 # Bugs:
 # Sometimes the background disappears and defaults into white background.
@@ -44,7 +44,7 @@ class MainWindow(Ui_MasterAPP):
         self.pb_updateCables.setEnabled(False)
 
         self.pg_workload_1.plotItem.setLabel('left', "Cable0")
-        self.pg_workload_1.plotItem.setLabel('top', 'Time [s]')
+        self.pg_workload_1.plotItem.setLabel('top', 'Time [HHMM.SS]')
         self.pg_workload_1.plotItem.showAxis("right")
         self.pg_workload_1.plotItem.getViewBox().setLimits(yMin=-0.2, yMax=2.2, xMin=-0.2, minYRange=-0.2, maxYRange=2.2, minXRange=-0.2)
         self.pg_workload_1.plotItem.getViewBox().setMouseEnabled(x=True,y=False)
@@ -384,27 +384,18 @@ class MainWindow(Ui_MasterAPP):
                     for line in lines:
                         index = int(line[0])                             # index indicates the pyqtgraph
                         state = int(line[22])                       # state indicates the Y value
-                        hour = int(line[13:15])
-                        minute = int(line[16:18])
-                        second = int(line[19:21])
-                        time = second + minute * 60 + hour * 3600   # time indicates the X value
+                        hour = line[13:15]
+                        minute = line[16:18]
+                        second = line[19:21]
+                        time = hour + minute + second
 
-
-                        '''if len(DataY[index]) > 0 and state != DataY[index][-1]:
-                            # Append the previous state with the current time
-                            DataX[index].append(DataX[index][-1])
-                            DataY[index].append(DataY[index][-1])
-
-                        # Append the current state with the current time
-                        DataX[index].append(time)
-                        DataY[index].append(state)'''
 
                         i = len(DataY[index])
                         if int(i) != 0:
                             if DataY[index][-1] != state:
                                 DataX[index].append(DataX[index][-1])
                                 DataY[index].append(state)
-                        DataX[index].append(time)
+                        DataX[index].append(float(time)/100)
                         DataY[index].append(state)
 
         self.setPlots((DataX, DataY, True))
@@ -744,10 +735,11 @@ class MainWindow(Ui_MasterAPP):
             newverticalLayout.addWidget(newviewImage)
             newverticalLayout.addItem(spacerItem)
 
-            spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+            spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
 
             newstatusImage = QtWidgets.QLabel(newCableItem)
             newstatusImage.setStyleSheet(self.statusImage_1.styleSheet())
+            newstatusImage.setSizePolicy(self.statusImage_1.sizePolicy())
             newstatusImage.setText("")
             newstatusImage.setPixmap(QtGui.QPixmap(":/img/Img/GreenLight.png"))
             newstatusImage.setScaledContents(self.statusImage_1.hasScaledContents())
@@ -1750,6 +1742,8 @@ class PLC_Client(): # slot has to be in undefined class
     # Returns a response from channel in form of a list [0, 0, 0]
     def PLC_Response(self, readResponse=True):
         global reading
+
+        plc_server: ModbusClient = LRLibrary.clientList["PLC"].get_client()
         if self.debug:
             words = [0]*7
             words[0] = 2
@@ -2871,33 +2865,52 @@ def updateValues(blank=False):
     if blank: return #blank is just a set up. If thread is already running, return
     SM.getValues()
 
-    printH("CableUpdate: Online", 0)
-    LRLibrary.UpdateLibrary()
+    #LRLibrary.UpdateLibrary() # strange critical failure
     cableUpdateInterrupt = False
 
+    printH("CableUpdate:", 0 , "Online")
     # Get first values
-    statV = LRLibrary.getRegisters("PLC", "DINP", 0, 8)
+    '''statV = LRLibrary.getRegisters("PLC", "DINP", 0, 8)
     riderV = LRLibrary.getRegisters("PLC", "DINP", 8, 7)
     tempV = LRLibrary.getRegisters("PLC", "IREG", 1, 2)
-    cableV = LRLibrary.getRegisters("PLC", "HREG", 0, cableCount*3)
-
+    cableV = LRLibrary.getRegisters("PLC", "HREG", 0, cableCount*3)'''
+    '''printH("Hit: \n" +
+           "HREG: " + str(LRLibrary.clientList["PLC"]._localHoldingRegisters) + "\n" +
+           "IREG: " + str(LRLibrary.clientList["PLC"]._localInputRegisters) + "\n" +
+           "DINP: " + str(LRLibrary.clientList["PLC"]._localDiscreteInputs) + "\n" +
+           "COIL: " + str(LRLibrary.clientList["PLC"]._localCoils)
+           )'''
+    '''if not LRLibrary.clientList["PLC"].get_client().is_open():
+        LRLibrary.clientList["PLC"].get_client().open()
+    statV = LRLibrary.clientList["PLC"].get_client().read_discrete_inputs(0, 8)
+    tempV = LRLibrary.clientList["PLC"].get_client().read_input_registers(1, 2)
+    riderV = LRLibrary.clientList["PLC"].get_client().read_discrete_inputs(8, 7)
+    if not plc.plc_stateOnly:
+        cableV = LRLibrary.clientList["PLC"].get_client().read_holding_registers(5, 9)
+    else:
+        cableV = [2, 0]'''
+    response = plc.PLC_Response()
     for i in range(cableCount):
-        plc.PLC_Decypher(response=wrap_Response(statV, tempV, cableV if not plc.plc_stateOnly else [2, i]))
-        '''item:list = []
-        item.append(statV)
-        item.append(tempV)
-        item.append(cableV[0+(i*3):2+(i*3)])
-        # cable0 = (0-2), cable1 = (3-5), cable2 = (6-8), cable3 = (9-11)
-        response:list = [2, i]
-        response.extend(item)'''
+        #cableV = [2, i]
+        response[0] = 2
+        response[1] = i
+        plc.PLC_Decypher(response=response)
+    printH("response:", 1 , str(response))
+    printH("quidoInputs:", 2 , str(quidoinputs))
+
+        #printH("cableV:", 1 , str(cableV))
+        #printH("riderV:", 1 , str(riderV))
+    #printH("statV:", 1 , str(statV))
+    #printH("tempV:", 1 , str(tempV))
+
 
     # Setup updater values
     useDebugValues = False
     stopUpdate = False
-    statVLast = statV
+    '''statVLast = statV
     riderVLast = riderV
     tempVLast = tempV
-    cableVLast = cableV
+    cableVLast = cableV'''
     lastTime = 0
     atpw = [0]*20
 
@@ -2944,38 +2957,56 @@ def updateValues(blank=False):
             com.plc_client.close()
 
             start_time = time()
+            response = plc.PLC_Response()
+            if response is False: continue
+
+            printH("CableUpdate:", 0)
+            for i in range(cableCount):
+                #cableV = [2, i]
+                response[0] = 2
+                response[1] = i
+                plc.PLC_Decypher(response=response)
+            printH("response:", 1 , str(response))
+            printH("quidoInputs:", 2 , str(quidoinputs))
             # Update values
-            statV = LRLibrary.getRegisters("PLC", "DINP", 0, 8)
+            '''statV = LRLibrary.getRegisters("PLC", "DINP", 0, 8)
             tempV = LRLibrary.getRegisters("PLC", "IREG", 1, 2)
             riderV = LRLibrary.getRegisters("PLC", "DINP", 8, 7)
-            cableV = LRLibrary.getRegisters("PLC", "HREG", 5, 9)
+            cableV = LRLibrary.getRegisters("PLC", "HREG", 5, 9)'''
+            '''if not LRLibrary.clientList["PLC"].get_client().is_open():
+                LRLibrary.clientList["PLC"].get_client().open()
+            statV = LRLibrary.clientList["PLC"].get_client().read_discrete_inputs(0, 8)
+            tempV = LRLibrary.clientList["PLC"].get_client().read_input_registers(1, 2)
+            riderV = LRLibrary.clientList["PLC"].get_client().read_discrete_inputs(8, 7)
+            if not plc.plc_stateOnly:
+                cableV = LRLibrary.clientList["PLC"].get_client().read_holding_registers(5, 9)
+            else:
+                cableV = [2, 0]
+
             if (statV, riderV, tempV, cableV) != (statVLast, riderVLast, tempVLast, cableVLast) or plc.debug:
                 Watcher2 = time()
                 start_timeb = time()
-                if statV is False or riderV is False or tempV is False or cableV is False:
+                if statV is None or riderV is None or tempV is None or cableV is None:
                     printH("Failure to read Values.", description=str((statV, riderV, tempV, cableV)))
                     com.status_word = LRLibrary.wordToList(LRLibrary.registerToWord(statV, length=len(com.status_word)))
                 else:
+                    printH("CableUpdate:", 0)
                     for i in range(cableCount):
-                        plc.PLC_Decypher(response=wrap_Response(statV, tempV, cableV if not plc.plc_stateOnly else [2, i]))
-                        '''item:list = []
-                        item.append(statV if not plc.debug else [random.choice([True, False]) for _ in range(8)])
-                        item.append([temp / 10 for temp in tempV] if not plc.debug else [random.randrange(200, 800) / 10, random.randrange(200, 800) / 10])
-                        if not plc.debug:
-                            item.append(cableV[0+(i*3):2+(i*3)])
+                        cableV = [2, i]
+                        plc.PLC_Decypher(response=wrap_Response(statV, tempV, cableV))
 
-
-                        # cable0 = (0-2), cable1 = (3-5), cable2 = (6-8), cable3 = (9-11)
-                        response:list = [2, i]
-                        response.extend(item)'''
-                Watcher2 = time() - Watcher2
+                        #printH("cableV:", 1 , str(cableV))
+                        #printH("riderV:", 1 , str(riderV))
+                    printH("statV:", 1 , str(statV))
+                    printH("tempV:", 1 , str(tempV))
+                Watcher2 = time() - Watcher2'''
 
                 #printH("Completed in " + str(time() - start_timeb)[:5] + "s", 1)
 
-            statVLast = statV
+            '''statVLast = statV
             riderVLast = riderV
             tempVLast = tempV
-            cableVLast = cableV
+            cableVLast = cableV'''
             valuesUpdated = True #Flag for something
 
             if time() - start_time > autoUpdate_Interval:
@@ -3032,9 +3063,10 @@ def updateValues(blank=False):
     else:
         printH("Cable Update terminated.", 0)
         stopUpdate = False
+        LRLibrary.clientList["PLC"].get_client().close()
 cableUpdate = threadPool.submit(updateValues, blank=True)
 
-def wrap_Response(statV:list, tempV:list, cableV:list=None, readResponse=True):
+def wrap_Response(statV:list, tempV:list, cableV:list, readResponse=True):
     '''
     Holding registers:
         4 - Status Word (Message indication)
@@ -3058,22 +3090,27 @@ def wrap_Response(statV:list, tempV:list, cableV:list=None, readResponse=True):
         if not not int(message[5]):  #Return False if PLC sends error message
             return False
 
-    inputs = statV.copy() #Quido discrete inputs
-    temp = tempV.copy()
-    temp[0] = "{:.1f}".format(temp[0] / 10)
-    temp[1] = "{:.1f}".format(temp[1] / 10)
-    if inputs is None:
-        inputs = [False]*quidoMaxInput
+    #statV = statV.copy() #Quido discrete inputs
+    temp = [0, 0]
+    if tempV is None:
+        temp[0] = window.t_label_2.text()[:-2]
+        temp[1] = window.t_label_4.text()[:-2]
+    else:
+        temp[0] = "{:.1f}".format(tempV[0] / 10)
+        temp[1] = "{:.1f}".format(tempV[1] / 10)
+    if statV is None:
+        statV = [False]*quidoMaxInput
     quidoinputs.clear()
     i = 0
     while i < quidoMaxInput:
-        quidoinputs.append([inputs[i], inputs[i + 1]])
+        quidoinputs.append([statV[i], statV[i + 1]])
         i += 2
 
-    words = cableV.copy()  #read all Actual Values
-    if words is None:
+    if cableV is None:
         words = [0]*7
         words[0] = 2
+    else:
+        words = cableV  #read all Actual Values
 
     action = words[0]
     index = words[1]

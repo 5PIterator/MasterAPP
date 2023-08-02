@@ -232,10 +232,10 @@ def WriteLibrary(client:LRLClient, fromUpdate=False):
                 if not client.get_client().is_open():
                     if not client.get_client().open():
                         return False
-                    
+
                 if wordIndex is not None:
-                    #if register is None or address != client._newRegisters[i-1][0]: 
-                    register = client._localHoldingRegisters[address]  
+                    #if register is None or address != client._newRegisters[i-1][0]:
+                    register = client._localHoldingRegisters[address]
 
                     if registerToWord(register, wordIndex) == str(value):
                         continue
@@ -247,8 +247,8 @@ def WriteLibrary(client:LRLClient, fromUpdate=False):
 
                 else:
                     register = value
-                    
-                client.get_client().write_single_register(address, register) 
+
+                client.get_client().write_single_register(address, register)
                 client._localHoldingRegisters[address] = register
 
             for regList in client._newRegisterSet:
