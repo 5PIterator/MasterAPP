@@ -118,7 +118,8 @@ def UpdateLibrary():
     start_time = time()
     for client in list(clientList.values()): # For every client in clientList
         client: LRLClient
-        client.get_client().open()
+        if not client.get_client().is_open():
+            client.get_client().open()
 
         t = 0
         timeout = 5
@@ -171,7 +172,7 @@ def UpdateLibrary():
                 break
             t += 1
         fin = time() - start_time
-        client.get_client().close()
+        #client.get_client().close()
         client._newRegisters = []
         client._newRegisterSet = []
         print("Update: read-" + str(format(readTime,'.4f')) + ", write-" + str(format(writeTime,'.4f')) + " ("+ client._name +")")
