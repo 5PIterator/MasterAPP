@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>870</width>
-    <height>627</height>
+    <width>1206</width>
+    <height>709</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -84,8 +84,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>868</width>
-         <height>625</height>
+         <width>1204</width>
+         <height>707</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -602,8 +602,8 @@ QTabBar::tab::selected {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>527</width>
-                         <height>577</height>
+                         <width>738</width>
+                         <height>659</height>
                         </rect>
                        </property>
                        <layout class="QGridLayout" name="gridLayout_4">
@@ -779,8 +779,8 @@ selection-background-color:transparent;
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>527</width>
-                         <height>577</height>
+                         <width>738</width>
+                         <height>659</height>
                         </rect>
                        </property>
                        <widget class="QGroupBox" name="ServerGroupBox">
@@ -2385,8 +2385,8 @@ background:white
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>527</width>
-                         <height>577</height>
+                         <width>738</width>
+                         <height>659</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -2495,8 +2495,8 @@ background:white
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>311</width>
-                 <height>599</height>
+                 <width>436</width>
+                 <height>662</height>
                 </rect>
                </property>
                <property name="sizePolicy">
