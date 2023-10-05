@@ -3137,4 +3137,3 @@ if __name__ == "__main__":
     mainWindow.show()
     app.aboutToQuit.connect(window.StopButton)
     sys.exit(app.exec_())
-
