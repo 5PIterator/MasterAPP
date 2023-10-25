@@ -9,7 +9,7 @@ pyinstaller --onefile --distpath G:\My' 'Drive\MasterAPPEXE --windowed MasterAPP
 # Fix graph
 
 
-from pyModbusTCP.client import ModbusClient
+from pyModbusTCP import client
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import QThread
 from tkinter import messagebox
@@ -29,7 +29,7 @@ from ui.NewDomain import Ui_EnterNewDomain
 import ui.Images_rc  #Important! Do not delete.
 
 from ToMainThreadV2 import toMainThread
-import LocalRegistryLibraryV9 as LRLibrary
+import LocalRegistryLibraryV12 as LRLibrary
 import SettingsManagerV3 as SM
 from SettingsManagerV3 import settingsDict as SD
 
@@ -1456,8 +1456,8 @@ class PLC_Client(): # slot has to be in undefined class
                 4, str(self.host) + ":" + str(self.port) + " Unavailable", isRootEnd=True)
             return self.plc_retry_success
         plc_socket.close()
-        plc_server.host(self.host)
-        plc_server.port(self.port)
+        plc_server.host = self.host
+        plc_server.port = self.port
         printH("Success!", 4, "MasterAPP <---> " + str(self.host) + ":" + str(self.port))
 
         sleep(0.1)
@@ -1505,7 +1505,7 @@ class PLC_Client(): # slot has to be in undefined class
                 break
 
             sleep(self.plc_requestInterval)
-            if not plc_server.is_open():
+            if not plc_server.is_open:
                 if not plc_server.open():
                     printH(
                         "Connection lost with PLC. " +
@@ -1743,7 +1743,7 @@ class PLC_Client(): # slot has to be in undefined class
     def PLC_Response(self, readResponse=True):
         global reading
 
-        plc_server: ModbusClient = LRLibrary.clientList["PLC"].get_client()
+        plc_server: client.ModbusClient = LRLibrary.clientList["PLC"].get_client()
         if self.debug:
             words = [0]*7
             words[0] = 2
@@ -1769,7 +1769,7 @@ class PLC_Client(): # slot has to be in undefined class
             response.extend(item)
             return response
         try:
-            if not plc_server.is_open():      # retry if channel is not open
+            if not plc_server.is_active:      # retry if channel is not open
                 if not plc_server.open():
                     return False
             '''
@@ -1796,7 +1796,7 @@ class PLC_Client(): # slot has to be in undefined class
                     return False
 
             inputs = plc_server.read_discrete_inputs(0, quidoMaxInput) #Quido discrete inputs
-            temp = plc_server.read_input_registers(1, 2)
+            temp = plc_server.read_input_registers(1, 2).registers
             temp[0] = "{:.1f}".format(temp[0] / 10)
             temp[1] = "{:.1f}".format(temp[1] / 10)
             if inputs is None:
@@ -2040,7 +2040,7 @@ retry = None
 
 # MasterAPP Communication
 api_server = HTTPConnection
-plc_server = ModbusClient()
+plc_server = client.ModbusClient
 
 # QObject lists
 cableCount = 4
@@ -2715,7 +2715,7 @@ class Communication():
             "192.168.11.21",    #PLC1
             socket.gethostbyname(socket.gethostname()), #PLC8 - Debug (This machine)
         ]
-        self.plc_client = ModbusClient(timeout=5, auto_close=False, auto_open=True)
+        self.plc_client = client.ModbusClient(timeout=5, auto_close=False, auto_open=True)
         self.readyToSend = False
         self.cancelConn = False
 
@@ -2898,11 +2898,10 @@ def updateValues(blank=False):
     printH("response:", 1 , str(response))
     printH("quidoInputs:", 2 , str(quidoInputs))
 
-        #printH("cableV:", 1 , str(cableV))
-        #printH("riderV:", 1 , str(riderV))
+    #printH("cableV:", 1 , str(cableV))
+    #printH("riderV:", 1 , str(riderV))
     #printH("statV:", 1 , str(statV))
     #printH("tempV:", 1 , str(tempV))
-
 
     # Setup updater values
     useDebugValues = False
@@ -3028,6 +3027,32 @@ def updateValues(blank=False):
             minuteState[currentTime.second] = state
 
             currentTime = datetime.now()
+
+            with ftplib.FTP(domainHost) as ftp:
+                ftp.login(domainUser,domainPassword)
+                if currentTime.second >= 30:
+                    newTime = currentTime + timedelta(
+                        minutes=1,
+                        seconds=-currentTime.second,
+                        microseconds=-currentTime.microsecond)
+                else:
+                    newTime = currentTime + timedelta(
+                        minutes=0,
+                        seconds=-currentTime.second,
+                        microseconds=-currentTime.microsecond)
+
+                cableLines = ""
+                for index in range(len(CableItems)):
+                    temp1 = window.t_label_2.text()[:-2]
+                    temp2 = window.t_label_4.text()[:-2]
+                    cableLines = (
+                        str(index) + ";" +
+                        str(currentTime.date()) + " " + str(newTime.time().strftime("%H:%M:%S")) + ";" +
+                        str(state) + ";" +
+                        temp1 + ";" +
+                        temp2 + "\n"
+                    )                                
+                ftp.storbinary('STOR actual.wb', cableLines)
 
             updateInProgress = False
             print("Wait: Enter")
