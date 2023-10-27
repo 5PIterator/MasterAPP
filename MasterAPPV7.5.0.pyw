@@ -1,5 +1,5 @@
 '''
-pyinstaller --onefile --distpath G:\My' 'Drive\MasterAPPEXE --windowed MasterAPPV7.4.2.pyw
+pyinstaller --onefile --windowed MasterAPPV7.5.0.pyw
 '''
 # Bugs:
 # Sometimes the background disappears and defaults into white background.
@@ -9,13 +9,13 @@ pyinstaller --onefile --distpath G:\My' 'Drive\MasterAPPEXE --windowed MasterAPP
 # Fix graph
 
 
-from pyModbusTCP import client
+from pyModbusTCP.client import ModbusClient
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import QThread
 from tkinter import messagebox
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from http.client import HTTPConnection
-import sys, threading, socket, os, tkinter, numpy
+import sys, threading, socket, os, tkinter, numpy, io
 import ftplib
 from datetime import datetime, timedelta
 from time import sleep, time
@@ -1743,7 +1743,7 @@ class PLC_Client(): # slot has to be in undefined class
     def PLC_Response(self, readResponse=True):
         global reading
 
-        plc_server: client.ModbusClient = LRLibrary.clientList["PLC"].get_client()
+        plc_server: ModbusClient = LRLibrary.clientList["PLC"].get_client()
         if self.debug:
             words = [0]*7
             words[0] = 2
@@ -1769,7 +1769,7 @@ class PLC_Client(): # slot has to be in undefined class
             response.extend(item)
             return response
         try:
-            if not plc_server.is_active:      # retry if channel is not open
+            if not plc_server.is_open:      # retry if channel is not open
                 if not plc_server.open():
                     return False
             '''
@@ -1796,7 +1796,7 @@ class PLC_Client(): # slot has to be in undefined class
                     return False
 
             inputs = plc_server.read_discrete_inputs(0, quidoMaxInput) #Quido discrete inputs
-            temp = plc_server.read_input_registers(1, 2).registers
+            temp = plc_server.read_input_registers(1, 2)
             temp[0] = "{:.1f}".format(temp[0] / 10)
             temp[1] = "{:.1f}".format(temp[1] / 10)
             if inputs is None:
@@ -2040,7 +2040,7 @@ retry = None
 
 # MasterAPP Communication
 api_server = HTTPConnection
-plc_server = client.ModbusClient
+plc_server = ModbusClient
 
 # QObject lists
 cableCount = 4
@@ -2715,7 +2715,7 @@ class Communication():
             "192.168.11.21",    #PLC1
             socket.gethostbyname(socket.gethostname()), #PLC8 - Debug (This machine)
         ]
-        self.plc_client = client.ModbusClient(timeout=5, auto_close=False, auto_open=True)
+        self.plc_client = ModbusClient(timeout=5, auto_close=False, auto_open=True)
         self.readyToSend = False
         self.cancelConn = False
 
@@ -2780,11 +2780,11 @@ class Communication():
         if self.readyToSend:
             self.readyToSend = False
         try:
-            self.plc_client.host(self.IPList[index])
+            self.plc_client.host = self.IPList[index]
         except:
             return False
 
-        printH(string="Connecting to " + str(self.IPList[index]) + ":" + str(self.plc_client.port()))
+        printH(string="Connecting to " + str(self.IPList[index]) + ":" + str(self.plc_client.port))
 
         try:
             if not self.plc_client.open():  # Connection Fail
@@ -2795,7 +2795,7 @@ class Communication():
                     return False
                 return False
             else:                           # Connection Success
-                self.plc_client.host(self.IPList[index])
+                self.plc_client.host = self.IPList[index]
                 if self.cancelConn:
                     self.cancelConn = False
                     return False
@@ -2833,7 +2833,7 @@ class Communication():
         stopUpdate = True
         while cableUpdate.running():
             continue
-        if self.plc_client.is_open():
+        if self.plc_client.is_open:
             self.plc_client.close()
         return True
 
@@ -3028,31 +3028,32 @@ def updateValues(blank=False):
 
             currentTime = datetime.now()
 
-            with ftplib.FTP(domainHost) as ftp:
-                ftp.login(domainUser,domainPassword)
-                if currentTime.second >= 30:
-                    newTime = currentTime + timedelta(
-                        minutes=1,
-                        seconds=-currentTime.second,
-                        microseconds=-currentTime.microsecond)
-                else:
-                    newTime = currentTime + timedelta(
-                        minutes=0,
-                        seconds=-currentTime.second,
-                        microseconds=-currentTime.microsecond)
+            if currentTime.second >= 30:
+                newTime = currentTime + timedelta(
+                    minutes=1,
+                    seconds=-currentTime.second,
+                    microseconds=-currentTime.microsecond)
+            else:
+                newTime = currentTime + timedelta(
+                    minutes=0,
+                    seconds=-currentTime.second,
+                    microseconds=-currentTime.microsecond)
+                
+            cableLines = ""
+            for index in range(len(CableItems)):
+                temp1 = window.t_label_2.text()[:-2]
+                temp2 = window.t_label_4.text()[:-2]
+                cableLines += (
+                    str(index) + ";" +
+                    str(currentTime.date()) + " " + str(newTime.time().strftime("%H:%M:%S")) + ";" +
+                    str(state[index]) + ";" +
+                    temp1 + ";" +
+                    temp2 + "\n"
+                )
 
-                cableLines = ""
-                for index in range(len(CableItems)):
-                    temp1 = window.t_label_2.text()[:-2]
-                    temp2 = window.t_label_4.text()[:-2]
-                    cableLines = (
-                        str(index) + ";" +
-                        str(currentTime.date()) + " " + str(newTime.time().strftime("%H:%M:%S")) + ";" +
-                        str(state) + ";" +
-                        temp1 + ";" +
-                        temp2 + "\n"
-                    )                                
-                ftp.storbinary('STOR actual.wb', cableLines)
+            with ftplib.FTP(domainHost) as ftp:
+                ftp.login(domainUser, domainPassword)
+                ftp.storbinary('STOR actual.wb', io.BytesIO(cableLines.encode('utf-8')))
 
             updateInProgress = False
             print("Wait: Enter")
@@ -3070,13 +3071,16 @@ def updateValues(blank=False):
             window.updateLabelCounter(window.l_plcInterval, str(0).zfill(2))
             print("Wait: Exit")
 
+            fin = (time() - start_time)
 
-            atpw.append((time() - start_time) + LRLibrary.readTime + LRLibrary.writeTime)
+            atpw.append(fin) # contains ten last total processing times
             atpw.pop(0)
-            processingTime = numpy.average(atpw)
+            processingTime = numpy.average(atpw) # average processing time
 
             delay = max(0, plc.plc_requestInterval - processingTime)
-            print(delay + processingTime , "("+ str(processingTime) +")")
+            sleep(delay)
+            print("Current: %f (%f)" % (round(delay + fin, 4), round(fin, 4)))
+            print("Average: %f (%f)" % (round(delay + processingTime, 4), round(processingTime, 4)))
 
             #sleep(delay)
     except Exception as err:

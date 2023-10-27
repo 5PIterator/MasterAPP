@@ -1,13 +1,13 @@
 from time import time
 from typing import Dict
 import numpy, threading
-from pymodbus.client.tcp import ModbusTcpClient
+from pyModbusTCP.client import ModbusClient
 from concurrent.futures import ThreadPoolExecutor
 
 
 class LRLClient():
     def __init__(self,
-        client: ModbusTcpClient = None,
+        client: ModbusClient = None,
         name:str = "MAIN",
         host:str = None,
         port:int = None,
@@ -86,7 +86,7 @@ clientList: Dict[str, LRLClient] = {}
 threadpool = ThreadPoolExecutor(3)
 def add_client(
     name: str,
-    client:ModbusTcpClient=None,
+    client:ModbusClient=None,
     host=None,
     port=502,
     highestAddress=1000,
@@ -96,7 +96,7 @@ def add_client(
     """Adds/overwrites a handled client to the clientList.\nEither use already established 'ModbusTcpClient' or fill out 'host', 'port'\n
     decide which registers/bits you wish this client to operate with: default none"""
     if client is None:
-        client = ModbusTcpClient(host, port)
+        client = ModbusClient(host, port)
     clientList[name] = LRLClient(client, name, host, port, highestAddress, transferLimit, HReg, IReg, DInp, Coil)
     clientList[name].setup_localRegisters()
 
@@ -115,8 +115,8 @@ def UpdateLibrary():
         readTime = 0
         writeTime = 0
 
-        if not client.get_client().is_active():
-            if not client.get_client().connect():
+        if not client.get_client().is_open:
+            if not client.get_client().open():
                 task_results.append(False)
                 return False
 
@@ -219,13 +219,13 @@ def ReadLibrary(client:LRLClient, fromUpdate=False):
     while t < timeout:
         try:
             for i in range(0, client._highestAddress + 1, reqLimit):
-                if not client.get_client().is_active():
-                    if not client.get_client().connect():
+                if not client.get_client().is_open:
+                    if not client.get_client().open():
                         return False
-                if client._readHoldingRegisters: holdingReg.extend(client.get_client().read_holding_registers(i, reqLimit).registers)
-                if client._readInputRegisters: inputReg.extend(client.get_client().read_input_registers(i, reqLimit).registers)
-                if client._readDiscreteInputs: discreteIn.extend(client.get_client().read_discrete_inputs(i, reqLimit).registers)
-                if client._readCoils: coils.extend(client.get_client().read_coils(i, reqLimit).registers)
+                if client._readHoldingRegisters: holdingReg.extend(client.get_client().read_holding_registers(i, reqLimit))
+                if client._readInputRegisters: inputReg.extend(client.get_client().read_input_registers(i, reqLimit))
+                if client._readDiscreteInputs: discreteIn.extend(client.get_client().read_discrete_inputs(i, reqLimit))
+                if client._readCoils: coils.extend(client.get_client().read_coils(i, reqLimit))
         except:
             t += 1
         else:
@@ -255,8 +255,8 @@ def WriteLibrary(client:LRLClient, fromUpdate=False):
 
             for i, reg in enumerate(client._newRegisters):
                 address, value, wordIndex = reg
-                if not client.get_client().is_active():
-                    if not client.get_client().connect():
+                if not client.get_client().is_open:
+                    if not client.get_client().open():
                         return False
 
                 if wordIndex is not None:
@@ -275,30 +275,30 @@ def WriteLibrary(client:LRLClient, fromUpdate=False):
                 else:
                     register = value
 
-                client.get_client().write_register(address, register)
+                client.get_client().write_single_register(address, register)
                 #client._localHoldingRegisters[address] = client.get_client().read_holding_registers(address, 1)[0]
 
             result = time() - start_time
             for regList in client._newRegisterSet:
                 firstAddress, registers = regList
-                if not client.get_client().is_active():
-                    if not client.get_client().connect():
+                if not client.get_client().is_open:
+                    if not client.get_client().open():
                         return False
-                client.get_client().write_registers(firstAddress, registers)
+                client.get_client().write_multiple_registers(firstAddress, registers)
 
             for coi in client._newCoils:
                 address, coil = coi
-                if not client.get_client().is_active():
-                    if not client.get_client().connect():
+                if not client.get_client().is_open:
+                    if not client.get_client().open():
                         return False
-                client.get_client().write_coil(address, coil)
+                client.get_client().write_single_coil(address, coil)
 
             for coilList in client._newCoilSet:
                 firstAddress, coils = coilList
-                if not client.get_client().is_active():
-                    if not client.get_client().connect():
+                if not client.get_client().is_open:
+                    if not client.get_client().open():
                         return False
-                client.get_client().write_coils(firstAddress, coils)
+                client.get_client().write_multiple_coils(firstAddress, coils)
         except:
             t += 1
             continue
