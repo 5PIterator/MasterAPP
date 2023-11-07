@@ -2868,41 +2868,6 @@ def updateValues(blank=False):
     #LRLibrary.UpdateLibrary() # strange critical failure
     cableUpdateInterrupt = False
 
-    printH("CableUpdate:", 0 , "Online")
-    # Get first values
-    '''statV = LRLibrary.getRegisters("PLC", "DINP", 0, 8)
-    riderV = LRLibrary.getRegisters("PLC", "DINP", 8, 7)
-    tempV = LRLibrary.getRegisters("PLC", "IREG", 1, 2)
-    cableV = LRLibrary.getRegisters("PLC", "HREG", 0, cableCount*3)'''
-    '''printH("Hit: \n" +
-           "HREG: " + str(LRLibrary.clientList["PLC"]._localHoldingRegisters) + "\n" +
-           "IREG: " + str(LRLibrary.clientList["PLC"]._localInputRegisters) + "\n" +
-           "DINP: " + str(LRLibrary.clientList["PLC"]._localDiscreteInputs) + "\n" +
-           "COIL: " + str(LRLibrary.clientList["PLC"]._localCoils)
-           )'''
-    '''if not LRLibrary.clientList["PLC"].get_client().is_open():
-        LRLibrary.clientList["PLC"].get_client().open()
-    statV = LRLibrary.clientList["PLC"].get_client().read_discrete_inputs(0, 8)
-    tempV = LRLibrary.clientList["PLC"].get_client().read_input_registers(1, 2)
-    riderV = LRLibrary.clientList["PLC"].get_client().read_discrete_inputs(8, 7)
-    if not plc.plc_stateOnly:
-        cableV = LRLibrary.clientList["PLC"].get_client().read_holding_registers(5, 9)
-    else:
-        cableV = [2, 0]'''
-    response = plc.PLC_Response()
-    for i in range(cableCount):
-        #cableV = [2, i]
-        response[0] = 2
-        response[1] = i
-        plc.PLC_Decipher(response=response)
-    printH("response:", 1 , str(response))
-    printH("quidoInputs:", 2 , str(quidoInputs))
-
-    #printH("cableV:", 1 , str(cableV))
-    #printH("riderV:", 1 , str(riderV))
-    #printH("statV:", 1 , str(statV))
-    #printH("tempV:", 1 , str(tempV))
-
     # Setup updater values
     useDebugValues = False
     stopUpdate = False
@@ -2912,6 +2877,47 @@ def updateValues(blank=False):
     cableVLast = cableV'''
     lastTime = 0
     atpw = [0]*20
+    
+    # Get first values
+    '''statV = LRLibrary.getRegisters("PLC", "DINP", 0, 8)
+    riderV = LRLibrary.getRegisters("PLC", "DINP", 8, 7)
+    tempV = LRLibrary.getRegisters("PLC", "IREG", 1, 2)
+    cableV = LRLibrary.getRegisters("PLC", "HREG", 0, cableCount*3)
+    printH("Hit: \n" +
+           "HREG: " + str(LRLibrary.clientList["PLC"]._localHoldingRegisters) + "\n" +
+           "IREG: " + str(LRLibrary.clientList["PLC"]._localInputRegisters) + "\n" +
+           "DINP: " + str(LRLibrary.clientList["PLC"]._localDiscreteInputs) + "\n" +
+           "COIL: " + str(LRLibrary.clientList["PLC"]._localCoils)
+           )
+    if not LRLibrary.clientList["PLC"].get_client().is_open():
+        LRLibrary.clientList["PLC"].get_client().open()
+    statV = LRLibrary.clientList["PLC"].get_client().read_discrete_inputs(0, 8)
+    tempV = LRLibrary.clientList["PLC"].get_client().read_input_registers(1, 2)
+    riderV = LRLibrary.clientList["PLC"].get_client().read_discrete_inputs(8, 7)
+    if not plc.plc_stateOnly:
+        cableV = LRLibrary.clientList["PLC"].get_client().read_holding_registers(5, 9)
+    else:
+        cableV = [2, 0]
+        
+    #printH("cableV:", 1 , str(cableV))
+    #printH("riderV:", 1 , str(riderV))
+    #printH("statV:", 1 , str(statV))
+    #printH("tempV:", 1 , str(tempV))'''
+
+    response = plc.PLC_Response()
+    if response is False: 
+        printH("CableUpdate:", 0 , "Offline")
+        threadPool.submit(Retry())
+        return
+    else:
+        printH("CableUpdate:", 0 , "Online")
+        for i in range(cableCount):
+            #cableV = [2, i]
+            response[0] = 2
+            response[1] = i
+            plc.PLC_Decipher(response=response)
+        printH("response:", 1 , str(response))
+        printH("quidoInputs:", 2 , str(quidoInputs))
 
     sleep(0.1)
     printH("CableUpdate: Waiting for new minute...", 0)
@@ -3028,32 +3034,32 @@ def updateValues(blank=False):
 
             currentTime = datetime.now()
 
-            if currentTime.second >= 30:
-                newTime = currentTime + timedelta(
-                    minutes=1,
-                    seconds=-currentTime.second,
-                    microseconds=-currentTime.microsecond)
-            else:
-                newTime = currentTime + timedelta(
-                    minutes=0,
-                    seconds=-currentTime.second,
-                    microseconds=-currentTime.microsecond)
-                
-            cableLines = ""
-            for index in range(len(CableItems)):
-                temp1 = window.t_label_2.text()[:-2]
-                temp2 = window.t_label_4.text()[:-2]
-                cableLines += (
-                    str(index) + ";" +
-                    str(currentTime.date()) + " " + str(newTime.time().strftime("%H:%M:%S")) + ";" +
-                    str(state[index]) + ";" +
-                    temp1 + ";" +
-                    temp2 + "\n"
-                )
-
-            with ftplib.FTP(domainHost) as ftp:
-                ftp.login(domainUser, domainPassword)
-                ftp.storbinary('STOR actual.wb', io.BytesIO(cableLines.encode('utf-8')))
+            if saveStyle > 0:
+                if currentTime.second >= 30:
+                    newTime = currentTime + timedelta(
+                        minutes=1,
+                        seconds=-currentTime.second,
+                        microseconds=-currentTime.microsecond)
+                else:
+                    newTime = currentTime + timedelta(
+                        minutes=0,
+                        seconds=-currentTime.second,
+                        microseconds=-currentTime.microsecond)
+                    
+                cableLines = ""
+                for index in range(len(CableItems)):
+                    temp1 = window.t_label_2.text()[:-2]
+                    temp2 = window.t_label_4.text()[:-2]
+                    cableLines += (
+                        str(index) + ";" +
+                        str(currentTime.date()) + " " + str(newTime.time().strftime("%H:%M:%S")) + ";" +
+                        str(state[index]) + ";" +
+                        temp1 + ";" +
+                        temp2 + "\n"
+                    )
+                with ftplib.FTP(domainHost) as ftp:
+                    ftp.login(domainUser, domainPassword)
+                    ftp.storbinary('STOR actual.wb', io.BytesIO(cableLines.encode('utf-8')))
 
             updateInProgress = False
             print("Wait: Enter")
@@ -3088,7 +3094,7 @@ def updateValues(blank=False):
         pass
     if (cableUpdateEnabled and cableUpdateAllowed):
         cableUpdate = threadPool.submit(updateValues)
-        printH("Cable Update restarted.", 0)
+        printH("CableUpdate:", 0 , "(Restart)")
     else:
         printH("Cable Update terminated.", 0)
         stopUpdate = False
