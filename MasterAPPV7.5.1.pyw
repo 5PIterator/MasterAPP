@@ -1,5 +1,5 @@
 '''
-pyinstaller --onefile --windowed MasterAPPV7.5.0.pyw
+pyinstaller --onefile --windowed MasterAPPV7.5.1.pyw
 '''
 # Bugs:
 # Sometimes the background disappears and defaults into white background.

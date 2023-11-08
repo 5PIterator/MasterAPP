@@ -1,5 +1,7 @@
 __pycache__/ToMainThreadV2.cpython-39.pyc
 __pycache__/ToMainThreadV1.cpython-39.pyc
+dist
+build
 *.pkg
 *.toc
 *.pyz
